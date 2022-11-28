@@ -1,6 +1,5 @@
 package com.beval.empirejavafx.dto.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
@@ -13,9 +12,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ResponseDTO {
+public class ResponseDTO<T> {
     private String message;
-    private Object content;
+    private T content;
     @Builder.Default
     private LocalDateTime timestamp = LocalDateTime.now();
     private int status;

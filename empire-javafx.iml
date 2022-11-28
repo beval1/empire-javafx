@@ -8,6 +8,17 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations" isTestSource="false" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/0/2" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/3/4" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/3/e" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/3/f" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/1" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/4" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/5" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/9" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/b" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/c" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/sonarlint/issuestore/d" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
