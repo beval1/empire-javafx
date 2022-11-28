@@ -1,8 +1,8 @@
 package com.beval.empirejavafx.views.register;
 
 import com.beval.empirejavafx.api.ApiClient;
+import com.beval.empirejavafx.dto.response.JwtResponseDTO;
 import com.beval.empirejavafx.dto.response.ResponseDTO;
-import com.beval.empirejavafx.manager.StageManager;
 import com.beval.empirejavafx.views.game.LoadingScreen;
 import com.beval.empirejavafx.views.login.LoginInForm;
 import javafx.event.ActionEvent;
@@ -33,14 +33,19 @@ public class RegisterController {
         System.out.println(emailField.getText());
         System.out.println(passwordField.getText());
 
-        ResponseDTO responseDTO = ApiClient.signUp(usernameField.getText(), emailField.getText(),
+        ResponseDTO<Object> responseDTO = ApiClient.signUp(usernameField.getText(), emailField.getText(),
                 passwordField.getText());
         System.out.println(responseDTO);
         if (responseDTO.getStatus() != 200){
             errorMessage.setText(responseDTO.getMessage());
         } else {
-            LoadingScreen loadingScreen = new LoadingScreen();
-            loadingScreen.show();
+            ResponseDTO<JwtResponseDTO> signInResponse =
+                    ApiClient.signIn(usernameField.getText(), passwordField.getText());
+
+            if (signInResponse.getStatus() != 200) {
+                LoadingScreen loadingScreen = new LoadingScreen();
+                loadingScreen.show();
+            }
         }
     }
 

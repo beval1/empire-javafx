@@ -4,7 +4,7 @@ import com.beval.empirejavafx.api.ApiClient;
 import com.beval.empirejavafx.dto.response.JwtResponseDTO;
 import com.beval.empirejavafx.dto.response.ResponseDTO;
 import com.beval.empirejavafx.manager.UserStateManager;
-import com.beval.empirejavafx.views.game.LoadingScreen;
+import com.beval.empirejavafx.views.game.Game;
 import com.beval.empirejavafx.views.register.RegisterForm;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,9 +34,11 @@ public class LogInController {
         if (responseDTO.getStatus() != 200){
             errorMessage.setText(responseDTO.getMessage());
         } else {
-            LoadingScreen loadingScreen = new LoadingScreen();
-            loadingScreen.show();
+//            LoadingScreen loadingScreen = new LoadingScreen();
+//            loadingScreen.show();
             UserStateManager.updateUserState();
+            Game game = new Game();
+            game.show();
         }
     }
 

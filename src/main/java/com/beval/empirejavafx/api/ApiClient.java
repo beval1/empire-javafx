@@ -30,7 +30,9 @@ public class ApiClient {
         HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
         ResponseDTO<JwtResponseDTO> responseDTO = JsonMapper.getMapper().readValue(httpResponse.body(),
                 new TypeReference<>() {});
-        bearerToken = responseDTO.getContent().getAccessToken();
+        if (httpResponse.statusCode() == 200) {
+            bearerToken = responseDTO.getContent().getAccessToken();
+        }
         return responseDTO;
     }
 

@@ -26,6 +26,9 @@ module com.example.empirejavafx {
     opens com.beval.empirejavafx.views.register to javafx.fxml;
     exports com.beval.empirejavafx.views.register;
 
+    opens com.beval.empirejavafx.views.game to javafx.fxml;
+    exports com.beval.empirejavafx.views.game;
+
     exports com.beval.empirejavafx.manager;
     opens com.beval.empirejavafx.manager to javafx.fxml;
 

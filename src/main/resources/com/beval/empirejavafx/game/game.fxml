@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import java.net.URL?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.beval.empirejavafx.views.game.GameController"
+           prefHeight="400.0" prefWidth="600.0"
+           fx:id="root"
+>
+
+    <stylesheets>
+        <URL value="@game.css"/>
+    </stylesheets>
+
+    <GridPane hgap="10" vgap="10" gridLinesVisible="true">
+        <HBox GridPane.columnIndex="50">
+            <ImageView>
+                <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658538/empire/usercontrols/resource_menu_decoration_left_zdant5.png"/>
+            </ImageView>
+            <StackPane>
+                <ImageView>
+                    <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658605/empire/usercontrols/wood_qstkbr.png"/>
+                </ImageView>
+                <Text fx:id="wood">1000</Text>
+            </StackPane>
+            <StackPane>
+                <ImageView>
+                    <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658634/empire/usercontrols/stone_zjhlip.png"/>
+                </ImageView>
+                <Text fx:id="stone">10000</Text>
+            </StackPane>
+            <StackPane>
+                <ImageView>
+                    <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658658/empire/usercontrols/food_iawlhn.png"/>
+                </ImageView>
+                <Text fx:id="food"></Text>
+            </StackPane>
+            <StackPane>
+                <ImageView>
+                    <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658681/empire/usercontrols/army_aa4fou.png"/>
+                </ImageView>
+                <Text fx:id="army"></Text>
+            </StackPane>
+            <StackPane>
+                <ImageView>
+                    <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658707/empire/usercontrols/city_hjqyje.png"/>
+                </ImageView>
+                <Text fx:id="citizens"></Text>
+            </StackPane>
+            <ImageView>
+                <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658571/empire/usercontrols/resource_bar_decoration_right_ajic9u.png"/>
+            </ImageView>
+        </HBox>
+    </GridPane>
+
+    <BorderPane>
+        <left>
+            <VBox spacing="30">
+                <VBox>
+                    <HBox>
+                        <ImageView>
+                            <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669642124/empire/usercontrols/flag_new-removebg_jiwrix.png"/>
+                        </ImageView>
+                        <StackPane>
+                            <ImageView>
+                                <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669656885/empire/usercontrols/level_big_new2_jtqo9u.png"/>
+                            </ImageView>
+                            <Text fx:id="levelText"></Text>
+                        </StackPane>
+                    </HBox>
+                    <StackPane>
+                        <ImageView>
+                            <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669648577/empire/usercontrols/username_place_holder_new_h4ky78.png"/>
+                        </ImageView>
+                        <Text fx:id="usernameText"></Text>
+                    </StackPane>
+                    <StackPane>
+                        <ImageView>
+                            <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669648792/empire/usercontrols/mighty_points_placeholder_new_eoowp0.png"/>
+                        </ImageView>
+                        <Text fx:id="mightyPointsText"></Text>
+                    </StackPane>
+                </VBox>
+                <VBox>
+                    <HBox alignment="BASELINE_LEFT">
+                        <StackPane>
+                            <ImageView>
+                                <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669649162/empire/usercontrols/rubies_placeholder_new_mqsrkt.png"/>
+                            </ImageView>
+                            <Text fx:id="rubiesText"></Text>
+                        </StackPane>
+                    </HBox>
+                    <HBox alignment="BASELINE_LEFT">
+                        <StackPane>
+                            <ImageView>
+                                <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669650664/empire/usercontrols/coins_placeholder_new_rslnw1.png"/>
+                            </ImageView>
+                            <Text fx:id="coinsText"></Text>
+                        </StackPane>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </left>
+
+        <bottom>
+            <HBox StackPane.alignment="BOTTOM_RIGHT" alignment="BOTTOM_RIGHT">
+                <ImageView>
+                    <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669638532/empire/usercontrols/world_icon_gimz5f.png"/>
+                </ImageView>
+                <ImageView>
+                    <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669638520/empire/usercontrols/buildings_icon_m9zdym.png"/>
+                </ImageView>
+                <ImageView>
+                    <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669638514/empire/usercontrols/army_icon_jlz6so.png"/>
+                </ImageView>
+            </HBox>
+        </bottom>
+    </BorderPane>
+</StackPane>

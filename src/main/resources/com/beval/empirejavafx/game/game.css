@@ -1,0 +1,13 @@
+#root {
+    display: block;
+}
+#root {
+    -fx-background-image: url("https://res.cloudinary.com/djog8qqis/image/upload/v1669639127/empire/usercontrols/green2_pb5ndw.png");
+    -fx-background-repeat: repeat;
+}
+#levelText {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+/*#levelText {*/
+/*}*/
