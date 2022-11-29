@@ -29,6 +29,21 @@ public class GameController {
     @FXML
     private Text coinsText;
 
+    @FXML
+    private Text wood;
+
+    @FXML
+    private Text stone;
+
+    @FXML
+    private Text food;
+
+    @FXML
+    private Text army;
+
+    @FXML
+    private Text citizens;
+
     public void updateView() throws IOException {
         levelText.setText(String.valueOf(UserStateManager.getLevel()));
         usernameText.setText(UserStateManager.getUsername());
@@ -41,5 +56,11 @@ public class GameController {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        wood.setText(String.valueOf(CastleStateManager.getWood()));
+        stone.setText(String.valueOf(CastleStateManager.getStone()));
+        food.setText(String.valueOf(CastleStateManager.getFood()));
+        army.setText(String.valueOf(CastleStateManager.getArmy()));
+        citizens.setText(String.valueOf(CastleStateManager.getCitizens()));
     }
 }

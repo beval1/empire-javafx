@@ -14,10 +14,6 @@ public class StageManager {
         StageManager.stage = stage;
     }
 
-//    public static void redirectTo(AbstractForm form) throws IOException {
-//        form.show();
-//    }
-
     public static void setTitle(String title) {
         stage.setTitle(title);
     }

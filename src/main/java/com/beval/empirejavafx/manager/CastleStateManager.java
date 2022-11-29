@@ -13,10 +13,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CastleStateManager {
-    private static List<CastleBuildingDTO> buildings = new ArrayList<>();
     private CastleStateManager() {}
+    private static String castleName;
+    private static List<CastleBuildingDTO> buildings = new ArrayList<>();
     private static int castleWorldMapCoordinateX;
     private static int castleWorldMapCoordinateY;
+    private static int wood;
+    private static int stone;
+    private static int food;
+    private static int army;
+    private static int citizens;
+
+    public static int getWood() {
+        return wood;
+    }
+
+    public static void setWood(int wood) {
+        CastleStateManager.wood = wood;
+    }
+
+    public static int getStone() {
+        return stone;
+    }
+
+    public static void setStone(int stone) {
+        CastleStateManager.stone = stone;
+    }
 
     public static void setBuildings(List<CastleBuildingDTO> buildings) {
         CastleStateManager.buildings = buildings;
@@ -42,6 +64,38 @@ public class CastleStateManager {
         CastleStateManager.castleWorldMapCoordinateY = castleWorldMapCoordinateY;
     }
 
+    public static String getCastleName() {
+        return castleName;
+    }
+
+    public static void setCastleName(String castleName) {
+        CastleStateManager.castleName = castleName;
+    }
+
+    public static int getFood() {
+        return food;
+    }
+
+    public static void setFood(int food) {
+        CastleStateManager.food = food;
+    }
+
+    public static int getArmy() {
+        return army;
+    }
+
+    public static void setArmy(int army) {
+        CastleStateManager.army = army;
+    }
+
+    public static int getCitizens() {
+        return citizens;
+    }
+
+    public static void setCitizens(int citizens) {
+        CastleStateManager.citizens = citizens;
+    }
+
     public static void loadUserCastle(String username, GridPane gridPane) throws IOException, InterruptedException {
         //send request to fetch castle
         ResponseDTO<CastleDTO> responseDTO = ApiClient.loadUserCastle(username);
@@ -49,10 +103,18 @@ public class CastleStateManager {
             throw new IllegalStateException("Can not load castle");
         }
         //update state
-        List<CastleBuildingDTO> buildings = responseDTO.getContent().getBuildings();
+        CastleDTO castleDTO = responseDTO.getContent();
+        List<CastleBuildingDTO> buildings = castleDTO.getBuildings();
         setBuildings(buildings);
-        setCastleWorldMapCoordinateX(responseDTO.getContent().getCoordinateX());
-        setCastleWorldMapCoordinateY(responseDTO.getContent().getCoordinateY());
+        setCastleName(castleDTO.getCastleName());
+        setCastleWorldMapCoordinateX(castleDTO.getCoordinateX());
+        setCastleWorldMapCoordinateY(castleDTO.getCoordinateY());
+        setWood(castleDTO.getWood());
+        setStone(castleDTO.getStone());
+        setFood(castleDTO.getFood());
+        setArmy(castleDTO.getArmy());
+        setCitizens(castleDTO.getCitizens());
+
         //set Image on Grid row and column
         for (CastleBuildingDTO building : buildings) {
             ImageView imageView = new ImageView(new Image(building.getBuildingEntity().getBuildingImage()));

@@ -22,7 +22,7 @@
 
     <GridPane hgap="30" vgap="30" >
 <!--        GridPane.columnSpan="20"-->
-        <HBox GridPane.columnIndex="15" >
+        <HBox GridPane.columnIndex="18" >
             <ImageView>
                 <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658538/empire/usercontrols/resource_menu_decoration_left_zdant5.png"/>
             </ImageView>
