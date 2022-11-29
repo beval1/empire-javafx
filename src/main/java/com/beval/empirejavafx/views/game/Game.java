@@ -1,8 +1,11 @@
 package com.beval.empirejavafx.views.game;
 
 import com.beval.empirejavafx.Main;
+import com.beval.empirejavafx.manager.BuildingStateManager;
+import com.beval.empirejavafx.manager.RenderingManager;
 import com.beval.empirejavafx.manager.StageManager;
 import com.beval.empirejavafx.views.AbstractView;
+import com.beval.empirejavafx.views.RenderingView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,18 +14,29 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Game implements AbstractView {
+public class Game implements AbstractView, RenderingView {
+    private GameController gameController;
+
     @Override
     public void show() throws IOException {
         Scene scene = createScene();
         Stage stage = createStage(scene);
         stage.show();
+
+        RenderingManager.setRenderingView(this);
+    }
+
+    @Override
+    public void render() throws IOException {
+//        Scene scene = this.createScene();
+//        StageManager.setScene(scene);
+        gameController.updateView();
     }
 
     private Scene createScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("game/game.fxml")));
         Parent root = loader.load();
-        GameController gameController = loader.getController();
+        this.gameController = loader.getController();
         gameController.updateView();
         return new Scene(root);
     }
@@ -32,6 +46,7 @@ public class Game implements AbstractView {
         stage.setScene(scene);
         stage.setTitle("Empire");
         stage.setMaximized(true);
+        stage.setResizable(false);
         StageManager.setStage(stage);
         return stage;
     }

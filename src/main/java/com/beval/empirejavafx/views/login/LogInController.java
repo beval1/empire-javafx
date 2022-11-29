@@ -42,7 +42,8 @@ public class LogInController {
         if (responseDTO.getStatus() != 200){
             errorMessage.setText(responseDTO.getMessage());
         } else {
-            UserStateManager.updateUserState();
+            //no need to load here, but it's nice optimization if loadingScreen works asynchronously
+//            UserStateManager.updateUserState();
             if (!AppConstants.DEBUG_MODE) {
                 LoadingScreen loadingScreen = new LoadingScreen();
                 loadingScreen.show();

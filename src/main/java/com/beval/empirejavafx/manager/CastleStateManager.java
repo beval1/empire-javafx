@@ -1,6 +1,7 @@
 package com.beval.empirejavafx.manager;
 
 import com.beval.empirejavafx.api.ApiClient;
+import com.beval.empirejavafx.config.AppConstants;
 import com.beval.empirejavafx.dto.response.CastleBuildingDTO;
 import com.beval.empirejavafx.dto.response.CastleDTO;
 import com.beval.empirejavafx.dto.response.ResponseDTO;
@@ -118,8 +119,8 @@ public class CastleStateManager {
         //set Image on Grid row and column
         for (CastleBuildingDTO building : buildings) {
             ImageView imageView = new ImageView(new Image(building.getBuildingEntity().getBuildingImage()));
-            imageView.setFitHeight(210);
-            imageView.setFitWidth(210);
+            imageView.setFitHeight(AppConstants.CASTLE_BUILDING_IMAGE_HEIGHT);
+            imageView.setFitWidth(AppConstants.CASTLE_BUILDING_IMAGE_WIDTH);
             gridPane.add(imageView, building.getCoordinateX(), building.getCoordinateY(), 7, 7);
         }
     }

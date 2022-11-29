@@ -3,10 +3,7 @@ package com.beval.empirejavafx.api;
 import com.beval.empirejavafx.config.AppConstants;
 import com.beval.empirejavafx.dto.payload.SignInDTO;
 import com.beval.empirejavafx.dto.payload.SignUpDTO;
-import com.beval.empirejavafx.dto.response.CastleDTO;
-import com.beval.empirejavafx.dto.response.JwtResponseDTO;
-import com.beval.empirejavafx.dto.response.ResponseDTO;
-import com.beval.empirejavafx.dto.response.UserInfoDTO;
+import com.beval.empirejavafx.dto.response.*;
 import com.beval.empirejavafx.utils.JsonMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 
@@ -15,6 +12,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 
 public class ApiClient {
     private ApiClient() {}
@@ -79,6 +77,16 @@ public class ApiClient {
     public static ResponseDTO<UserInfoDTO> fetchUserInfo() throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(AppConstants.UPDATE_USER_STATE_URL))
+                .header("Authorization", String.format("Bearer %s", bearerToken))
+                .GET()
+                .build();
+        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return JsonMapper.getMapper().readValue(httpResponse.body(), new TypeReference<>() {});
+    }
+
+    public static ResponseDTO<List<BuildingEntityDTO>> getBuildings() throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(AppConstants.GET_BUILDINGS_URL))
                 .header("Authorization", String.format("Bearer %s", bearerToken))
                 .GET()
                 .build();

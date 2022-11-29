@@ -30,13 +30,13 @@
                 <ImageView>
                     <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658605/empire/usercontrols/wood_qstkbr.png"/>
                 </ImageView>
-                <Text fx:id="wood">1000</Text>
+                <Text fx:id="wood"></Text>
             </StackPane>
             <StackPane>
                 <ImageView>
                     <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658634/empire/usercontrols/stone_zjhlip.png"/>
                 </ImageView>
-                <Text fx:id="stone">10000</Text>
+                <Text fx:id="stone"></Text>
             </StackPane>
             <StackPane>
                 <ImageView>
@@ -114,13 +114,13 @@
 
         <bottom>
             <HBox StackPane.alignment="BOTTOM_RIGHT" alignment="BOTTOM_RIGHT">
-                <ImageView>
+                <ImageView fx:id="worldMapImageIcon">
                     <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669638532/empire/usercontrols/world_icon_gimz5f.png"/>
                 </ImageView>
-                <ImageView>
+                <ImageView fx:id="buildingsImageIcon" onMouseClicked="#handleBuildingMenu">
                     <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669638520/empire/usercontrols/buildings_icon_m9zdym.png"/>
                 </ImageView>
-                <ImageView>
+                <ImageView fx:id="armyImageIcon">
                     <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669638514/empire/usercontrols/army_icon_jlz6so.png"/>
                 </ImageView>
             </HBox>
