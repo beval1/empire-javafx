@@ -3,6 +3,7 @@ package com.beval.empirejavafx.api;
 import com.beval.empirejavafx.config.AppConstants;
 import com.beval.empirejavafx.dto.payload.SignInDTO;
 import com.beval.empirejavafx.dto.payload.SignUpDTO;
+import com.beval.empirejavafx.dto.response.CastleDTO;
 import com.beval.empirejavafx.dto.response.JwtResponseDTO;
 import com.beval.empirejavafx.dto.response.ResponseDTO;
 import com.beval.empirejavafx.dto.response.UserInfoDTO;
@@ -47,14 +48,15 @@ public class ApiClient {
         return JsonMapper.getMapper().readValue(httpResponse.body(), new TypeReference<>() {});
     }
 
-//    public static ResponseDTO loadUserCastle(String username) throws IOException, InterruptedException {
-//        HttpRequest request = HttpRequest.newBuilder()
-//                .uri(URI.create(AppConstants.LOAD_USER_CASTLE_URL + String.format("?username=%s", username)))
-//                .GET()
-//                .build();
-//        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
-//        return JsonMapper.getMapper().readValue(httpResponse.body(), ResponseDTO.class);
-//    }
+    public static ResponseDTO<CastleDTO> loadUserCastle(String username) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(AppConstants.LOAD_USER_CASTLE_URL + String.format("?username=%s", username)))
+                .header("Authorization", String.format("Bearer %s", bearerToken))
+                .GET()
+                .build();
+        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return JsonMapper.getMapper().readValue(httpResponse.body(), new TypeReference<>() {});
+    }
 //
 //    public static ResponseDTO createBuilding(int buildingType, int castleBuildingId) throws IOException, InterruptedException {
 //        HttpRequest request = HttpRequest.newBuilder()

@@ -19,40 +19,7 @@ public class Game implements AbstractView {
         stage.show();
     }
 
-//    private HBox createHorizontalBottomBar(){
-//        HBox hBox = new HBox();
-//
-//        return hBox;
-//    }
-//
-//    private VBox createVerticalBar() {
-//        VBox vbox = new VBox();
-//
-//        return vbox;
-//    }
-//
-//    private GridPane createGrid(){
-//        GridPane gridPane = new GridPane();
-//        gridPane.setHgap(10);
-//        gridPane.setHgap(20);
-//        gridPane.setGridLinesVisible(true);
-//        Text text = new Text("wassup");
-//        gridPane.add(text, 0, 1);
-//        return gridPane;
-//    }
-//
-//    private BorderPane createBorderPane() {
-//        BorderPane borderPane = new BorderPane();
-////        borderPane.setCenter(createGrid());
-//        borderPane.setBottom(createHorizontalBottomBar());
-//        borderPane.setLeft(createVerticalBar());
-//        return borderPane;
-//    }
-
     private Scene createScene() throws IOException {
-//        StackPane stackPane = new StackPane();
-//        stackPane.getChildren().add(createGrid());
-//        stackPane.getChildren().add(createBorderPane());
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("game/game.fxml")));
         Parent root = loader.load();
         GameController gameController = loader.getController();

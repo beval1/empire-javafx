@@ -2,8 +2,12 @@
     display: block;
 }
 #root {
-    -fx-background-image: url("https://res.cloudinary.com/djog8qqis/image/upload/v1669639127/empire/usercontrols/green2_pb5ndw.png");
-    -fx-background-repeat: repeat;
+    /*-fx-background-image: url("https://res.cloudinary.com/djog8qqis/image/upload/v1669639127/empire/usercontrols/green2_pb5ndw.png");*/
+    /*-fx-background-repeat: repeat;*/
+    -fx-background-image: url("https://res.cloudinary.com/djog8qqis/image/upload/v1669685922/empire/usercontrols/castle-background-high-resolution_jbtrmn.png");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center;
+    -fx-background-size: 1800, 900;
 }
 #levelText {
     -fx-font-size: 24px;

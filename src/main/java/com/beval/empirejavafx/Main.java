@@ -1,7 +1,7 @@
 package com.beval.empirejavafx;
 
-import com.beval.empirejavafx.views.login.LoginInForm;
 import com.beval.empirejavafx.manager.StageManager;
+import com.beval.empirejavafx.views.login.LoginInForm;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

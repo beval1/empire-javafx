@@ -6,7 +6,6 @@
 <?import javafx.scene.image.Image?>
 <?import java.net.URL?>
 <?import javafx.scene.text.Text?>
-<?import javafx.geometry.Insets?>
 <StackPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="com.beval.empirejavafx.views.game.GameController"
@@ -18,8 +17,8 @@
         <URL value="@game.css"/>
     </stylesheets>
 
-    <GridPane hgap="10" vgap="10" gridLinesVisible="true">
-        <HBox GridPane.columnIndex="50">
+    <GridPane hgap="30" vgap="30" fx:id="grid" gridLinesVisible="true" >
+        <HBox GridPane.columnIndex="15" GridPane.columnSpan="20">
             <ImageView>
                 <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658538/empire/usercontrols/resource_menu_decoration_left_zdant5.png"/>
             </ImageView>
