@@ -17,8 +17,12 @@
         <URL value="@game.css"/>
     </stylesheets>
 
-    <GridPane hgap="30" vgap="30" fx:id="grid" gridLinesVisible="true" >
-        <HBox GridPane.columnIndex="15" GridPane.columnSpan="20">
+    <!-- castle buildings grid   -->
+    <GridPane fx:id="grid" hgap="30" vgap="30" gridLinesVisible="true"></GridPane>
+
+    <GridPane hgap="30" vgap="30" >
+<!--        GridPane.columnSpan="20"-->
+        <HBox GridPane.columnIndex="15" >
             <ImageView>
                 <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658538/empire/usercontrols/resource_menu_decoration_left_zdant5.png"/>
             </ImageView>
@@ -57,6 +61,7 @@
             </ImageView>
         </HBox>
     </GridPane>
+
 
     <BorderPane>
         <left>

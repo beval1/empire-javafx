@@ -1,7 +1,10 @@
 package com.beval.empirejavafx.config;
 
 public class AppConstants {
-    private AppConstants() {}
+    public static final boolean DEBUG_MODE = true;
+    public static final String DEBUG_MODE_USERNAME = "test1";
+    public static final String DEBUG_MODE_PASSWORD = "1234";
+
     public static final String API_URL = "http://localhost:8084/api/v1";
     public static final String LOGIN_URL = API_URL + "/auth/signin";
     public static final String REGISTER_URL = API_URL + "/auth/signup";
@@ -12,4 +15,6 @@ public class AppConstants {
 
     public static final String START_ANIMATION_URL =
             "https://empire-html5.goodgamestudios.com/default/ModernStartscreenAnimation_small.mp4";
+
+    private AppConstants() {}
 }

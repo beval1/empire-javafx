@@ -56,9 +56,9 @@ public class CastleStateManager {
         //set Image on Grid row and column
         for (CastleBuildingDTO building : buildings) {
             ImageView imageView = new ImageView(new Image(building.getBuildingEntity().getBuildingImage()));
-            imageView.setFitHeight(120);
-            imageView.setFitWidth(120);
-            gridPane.add(imageView, building.getCoordinateX(), building.getCoordinateY(), 4, 4);
+            imageView.setFitHeight(210);
+            imageView.setFitWidth(210);
+            gridPane.add(imageView, building.getCoordinateX(), building.getCoordinateY(), 7, 7);
         }
     }
 }
