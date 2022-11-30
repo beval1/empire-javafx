@@ -5,8 +5,8 @@ public class AppConstants {
     public static final String DEBUG_MODE_USERNAME = "test1";
     public static final String DEBUG_MODE_PASSWORD = "1234";
 
-    public static final int CASTLE_BUILDING_IMAGE_WIDTH = 210;
-    public static final int CASTLE_BUILDING_IMAGE_HEIGHT = 210;
+    public static final int CASTLE_BUILDING_IMAGE_WIDTH = 60;
+    public static final int CASTLE_BUILDING_IMAGE_HEIGHT = 60;
 
     public static final String START_ANIMATION_URL =
             "https://empire-html5.goodgamestudios.com/default/ModernStartscreenAnimation_small.mp4";

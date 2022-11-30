@@ -105,7 +105,7 @@ public class GameController {
                 }
                 Integer colIndex = GridPane.getColumnIndex(clickedNode);
                 Integer rowIndex = GridPane.getRowIndex(clickedNode);
-                System.out.println("Mouse clicked cell: " + colIndex + " And: " + rowIndex);
+                System.out.println("Mouse clicked cell: column - " + colIndex + " And: row - " + rowIndex);
                 try {
                     ResponseDTO<Object> responseDTO = ApiClient.createBuilding(rowIndex, colIndex, BuildingStateManager
                             .getBuildingEntity().getBuildingType().getId());

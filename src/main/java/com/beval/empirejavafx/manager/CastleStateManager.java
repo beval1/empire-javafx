@@ -5,13 +5,17 @@ import com.beval.empirejavafx.config.AppConstants;
 import com.beval.empirejavafx.dto.response.CastleBuildingDTO;
 import com.beval.empirejavafx.dto.response.CastleDTO;
 import com.beval.empirejavafx.dto.response.ResponseDTO;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static javafx.scene.layout.GridPane.setConstraints;
 
 public class CastleStateManager {
     private CastleStateManager() {}
@@ -118,10 +122,22 @@ public class CastleStateManager {
 
         //set Image on Grid row and column
         for (CastleBuildingDTO building : buildings) {
+//            Pane pane = (Pane) getNodeFromGridPane(gridPane, building.getCoordinateY(), building.getCoordinateX());
             ImageView imageView = new ImageView(new Image(building.getBuildingEntity().getBuildingImage()));
-            imageView.setFitHeight(AppConstants.CASTLE_BUILDING_IMAGE_HEIGHT);
-            imageView.setFitWidth(AppConstants.CASTLE_BUILDING_IMAGE_WIDTH);
+            imageView.setFitHeight(AppConstants.CASTLE_BUILDING_IMAGE_HEIGHT * building
+                    .getBuildingEntity().getBuildingType().getHeightSizingRatio());
+            imageView.setFitWidth(AppConstants.CASTLE_BUILDING_IMAGE_WIDTH * building
+                    .getBuildingEntity().getBuildingType().getWidthSizingRatio());
             gridPane.add(imageView, building.getCoordinateX(), building.getCoordinateY());
         }
+    }
+
+    private static Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
+        for (Node node : gridPane.getChildren()) {
+            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+                return node;
+            }
+        }
+        return null;
     }
 }

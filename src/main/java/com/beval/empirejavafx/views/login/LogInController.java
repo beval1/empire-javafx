@@ -4,7 +4,6 @@ import com.beval.empirejavafx.api.ApiClient;
 import com.beval.empirejavafx.config.AppConstants;
 import com.beval.empirejavafx.dto.response.JwtResponseDTO;
 import com.beval.empirejavafx.dto.response.ResponseDTO;
-import com.beval.empirejavafx.manager.UserStateManager;
 import com.beval.empirejavafx.views.game.Game;
 import com.beval.empirejavafx.views.game.LoadingScreen;
 import com.beval.empirejavafx.views.register.RegisterForm;

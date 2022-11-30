@@ -40,18 +40,18 @@ public class Game implements AbstractView, RenderingView {
     }
 
     public void initializeGrid(GridPane grid) {
-        int numCols = 30 ;
-        int numRows = 30 ;
+        int numCols = 27;
+        int numRows = 16;
 
         for (int i = 0 ; i < numCols ; i++) {
-            ColumnConstraints colConstraints = new ColumnConstraints();
-            colConstraints.setHgrow(Priority.SOMETIMES);
+            ColumnConstraints colConstraints = new ColumnConstraints(60);
+//            colConstraints.setHgrow(Priority.SOMETIMES);
             grid.getColumnConstraints().add(colConstraints);
         }
 
         for (int i = 0 ; i < numRows ; i++) {
-            RowConstraints rowConstraints = new RowConstraints();
-            rowConstraints.setVgrow(Priority.SOMETIMES);
+            RowConstraints rowConstraints = new RowConstraints(60);
+//            rowConstraints.setVgrow(Priority.SOMETIMES);
             grid.getRowConstraints().add(rowConstraints);
         }
 

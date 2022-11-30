@@ -58,7 +58,11 @@ public class ApiClient {
     }
 
     public static ResponseDTO<Object> createBuilding(int row, int column, int typeId) throws IOException, InterruptedException {
-        CreateBuildingDTO createBuildingDTO = new CreateBuildingDTO(row, column, typeId);
+        CreateBuildingDTO createBuildingDTO = CreateBuildingDTO.builder()
+                .row(row)
+                .column(column)
+                .typeId(typeId)
+                .build();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(ApiConfig.CREATE_BUILDING_URL))
                 .header("Authorization", String.format("Bearer %s", bearerToken))
