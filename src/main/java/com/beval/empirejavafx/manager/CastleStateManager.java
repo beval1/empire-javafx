@@ -121,7 +121,7 @@ public class CastleStateManager {
             ImageView imageView = new ImageView(new Image(building.getBuildingEntity().getBuildingImage()));
             imageView.setFitHeight(AppConstants.CASTLE_BUILDING_IMAGE_HEIGHT);
             imageView.setFitWidth(AppConstants.CASTLE_BUILDING_IMAGE_WIDTH);
-            gridPane.add(imageView, building.getCoordinateX(), building.getCoordinateY(), 7, 7);
+            gridPane.add(imageView, building.getCoordinateX(), building.getCoordinateY());
         }
     }
 }

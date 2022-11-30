@@ -36,7 +36,6 @@ public class UserStateManager {
 
     public static void updateUserState() throws IOException, InterruptedException {
         ResponseDTO<UserInfoDTO> responseDTO = ApiClient.fetchUserInfo();
-        System.out.println(responseDTO);
         UserStateManager.username = responseDTO.getContent().getUsername();
         UserStateManager.level = responseDTO.getContent().getLevel();
         UserStateManager.mightyPoints = responseDTO.getContent().getMightyPoints();

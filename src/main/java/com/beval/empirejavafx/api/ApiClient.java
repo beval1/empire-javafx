@@ -1,6 +1,7 @@
 package com.beval.empirejavafx.api;
 
-import com.beval.empirejavafx.config.AppConstants;
+import com.beval.empirejavafx.config.ApiConfig;
+import com.beval.empirejavafx.dto.payload.CreateBuildingDTO;
 import com.beval.empirejavafx.dto.payload.SignInDTO;
 import com.beval.empirejavafx.dto.payload.SignUpDTO;
 import com.beval.empirejavafx.dto.response.*;
@@ -21,7 +22,7 @@ public class ApiClient {
 
     public static ResponseDTO<JwtResponseDTO> signIn(String usernameOrEmail, String password) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(AppConstants.LOGIN_URL))
+                .uri(URI.create(ApiConfig.LOGIN_URL))
                 .POST(HttpRequest.BodyPublishers.ofString(JsonMapper.getMapper()
                         .writeValueAsString(new SignInDTO(usernameOrEmail, password))))
                 .header("Content-Type", "application/json")
@@ -37,7 +38,7 @@ public class ApiClient {
 
     public static ResponseDTO<Object> signUp(String username, String email, String password) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(AppConstants.REGISTER_URL))
+                .uri(URI.create(ApiConfig.REGISTER_URL))
                 .POST(HttpRequest.BodyPublishers.ofString(JsonMapper.getMapper()
                         .writeValueAsString(new SignUpDTO(username, email, password, "", ""))))
                 .header("Content-Type", "application/json")
@@ -48,26 +49,30 @@ public class ApiClient {
 
     public static ResponseDTO<CastleDTO> loadUserCastle(String username) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(AppConstants.LOAD_USER_CASTLE_URL + String.format("?username=%s", username)))
+                .uri(URI.create(ApiConfig.LOAD_USER_CASTLE_URL + String.format("?username=%s", username)))
                 .header("Authorization", String.format("Bearer %s", bearerToken))
                 .GET()
                 .build();
         HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
         return JsonMapper.getMapper().readValue(httpResponse.body(), new TypeReference<>() {});
     }
-//
-//    public static ResponseDTO createBuilding(int buildingType, int castleBuildingId) throws IOException, InterruptedException {
-//        HttpRequest request = HttpRequest.newBuilder()
-//                .uri(URI.create(AppConstants.CREATE_BUILDING_URL))
-//                .GET()
-//                .build();
-//        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
-//        return JsonMapper.getMapper().readValue(httpResponse.body(), ResponseDTO.class);
-//    }
+
+    public static ResponseDTO<Object> createBuilding(int row, int column, int typeId) throws IOException, InterruptedException {
+        CreateBuildingDTO createBuildingDTO = new CreateBuildingDTO(row, column, typeId);
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(ApiConfig.CREATE_BUILDING_URL))
+                .header("Authorization", String.format("Bearer %s", bearerToken))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(JsonMapper.getMapper()
+                        .writeValueAsString(createBuildingDTO)))
+                .build();
+        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return JsonMapper.getMapper().readValue(httpResponse.body(), new TypeReference<>() {});
+    }
 //
 //    public static ResponseDTO upgradeBuilding(int buildingType, int castleBuildingId) throws IOException, InterruptedException {
 //        HttpRequest request = HttpRequest.newBuilder()
-//                .uri(URI.create(AppConstants.UPGRADE_BUILDING_URL))
+//                .uri(URI.create(ApiConfig.UPGRADE_BUILDING_URL))
 //                .GET()
 //                .build();
 //        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -76,7 +81,7 @@ public class ApiClient {
 
     public static ResponseDTO<UserInfoDTO> fetchUserInfo() throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(AppConstants.UPDATE_USER_STATE_URL))
+                .uri(URI.create(ApiConfig.UPDATE_USER_STATE_URL))
                 .header("Authorization", String.format("Bearer %s", bearerToken))
                 .GET()
                 .build();
@@ -86,7 +91,7 @@ public class ApiClient {
 
     public static ResponseDTO<List<BuildingEntityDTO>> getBuildings() throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(AppConstants.GET_BUILDINGS_URL))
+                .uri(URI.create(ApiConfig.GET_BUILDINGS_URL))
                 .header("Authorization", String.format("Bearer %s", bearerToken))
                 .GET()
                 .build();

@@ -1,22 +1,23 @@
 package com.beval.empirejavafx.views.game;
 
+import com.beval.empirejavafx.api.ApiClient;
 import com.beval.empirejavafx.config.AppConstants;
+import com.beval.empirejavafx.dto.response.ResponseDTO;
 import com.beval.empirejavafx.manager.BuildingStateManager;
 import com.beval.empirejavafx.manager.CastleStateManager;
 import com.beval.empirejavafx.manager.StageManager;
 import com.beval.empirejavafx.manager.UserStateManager;
 import com.beval.empirejavafx.views.buildingmenu.BuildingMenu;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import lombok.Getter;
 import lombok.SneakyThrows;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 
@@ -90,10 +91,36 @@ public class GameController {
     }
 
     private void buildingMode() {
-        setCursorImage(BuildingStateManager.getBuildingEntity().getBuildingImage());
-//        grid.setOnMouseClicked();
+        if (BuildingStateManager.getCursor() == null) {
+            setCursorImage(BuildingStateManager.getBuildingEntity().getBuildingImage());
+        }
+        grid.setOnMouseClicked(mouseEvent -> {
+            Node clickedNode = mouseEvent.getPickResult().getIntersectedNode();
+            if (clickedNode != grid) {
+                // click on descendant node
+                Node parent = clickedNode.getParent();
+                while (parent != grid) {
+                    clickedNode = parent;
+                    parent = clickedNode.getParent();
+                }
+                Integer colIndex = GridPane.getColumnIndex(clickedNode);
+                Integer rowIndex = GridPane.getRowIndex(clickedNode);
+                System.out.println("Mouse clicked cell: " + colIndex + " And: " + rowIndex);
+                try {
+                    ResponseDTO<Object> responseDTO = ApiClient.createBuilding(rowIndex, colIndex, BuildingStateManager
+                            .getBuildingEntity().getBuildingType().getId());
+                    System.out.println(responseDTO);
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    BuildingStateManager.setInBuildingMode(false);
+                    BuildingStateManager.setBuildingEntity(null);
+                    BuildingStateManager.setCursor(null);
+                    StageManager.getStage().getScene().setCursor(null);
+                }
+            }
+        });
     }
-
 
     private void setCursorImage(String buildingImage) {
         ImageView imageView = new ImageView(new Image(buildingImage));
@@ -102,5 +129,6 @@ public class GameController {
         Image cursorImage = imageView.getImage();
         Cursor cursor = new ImageCursor(cursorImage);
         StageManager.getStage().getScene().setCursor(cursor);
+        BuildingStateManager.setCursor(cursor);
     }
 }

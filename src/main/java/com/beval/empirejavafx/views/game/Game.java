@@ -1,7 +1,6 @@
 package com.beval.empirejavafx.views.game;
 
 import com.beval.empirejavafx.Main;
-import com.beval.empirejavafx.manager.BuildingStateManager;
 import com.beval.empirejavafx.manager.RenderingManager;
 import com.beval.empirejavafx.manager.StageManager;
 import com.beval.empirejavafx.views.AbstractView;
@@ -9,6 +8,7 @@ import com.beval.empirejavafx.views.RenderingView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,8 +28,6 @@ public class Game implements AbstractView, RenderingView {
 
     @Override
     public void render() throws IOException {
-//        Scene scene = this.createScene();
-//        StageManager.setScene(scene);
         gameController.updateView();
     }
 
@@ -37,8 +35,36 @@ public class Game implements AbstractView, RenderingView {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("game/game.fxml")));
         Parent root = loader.load();
         this.gameController = loader.getController();
-        gameController.updateView();
+        initializeGrid(gameController.getGrid());
         return new Scene(root);
+    }
+
+    public void initializeGrid(GridPane grid) {
+        int numCols = 30 ;
+        int numRows = 30 ;
+
+        for (int i = 0 ; i < numCols ; i++) {
+            ColumnConstraints colConstraints = new ColumnConstraints();
+            colConstraints.setHgrow(Priority.SOMETIMES);
+            grid.getColumnConstraints().add(colConstraints);
+        }
+
+        for (int i = 0 ; i < numRows ; i++) {
+            RowConstraints rowConstraints = new RowConstraints();
+            rowConstraints.setVgrow(Priority.SOMETIMES);
+            grid.getRowConstraints().add(rowConstraints);
+        }
+
+        for (int i = 0 ; i < numCols ; i++) {
+            for (int j = 0; j < numRows; j++) {
+                addPane(i, j, grid);
+            }
+        }
+    }
+
+    private void addPane(int colIndex, int rowIndex, GridPane grid) {
+        Pane pane = new Pane();
+        grid.add(pane, colIndex, rowIndex);
     }
 
     private Stage createStage(Scene scene){

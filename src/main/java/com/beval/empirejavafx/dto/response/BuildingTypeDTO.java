@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class BuildingTypeDTO {
+    private int id;
     private String buildingName;
     private int castleLimit;
     private boolean buildable;
