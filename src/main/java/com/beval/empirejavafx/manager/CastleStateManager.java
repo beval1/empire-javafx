@@ -9,13 +9,10 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static javafx.scene.layout.GridPane.setConstraints;
 
 public class CastleStateManager {
     private CastleStateManager() {}
