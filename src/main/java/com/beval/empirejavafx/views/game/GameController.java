@@ -3,6 +3,7 @@ package com.beval.empirejavafx.views.game;
 import com.beval.empirejavafx.api.ApiClient;
 import com.beval.empirejavafx.config.AppConstants;
 import com.beval.empirejavafx.dto.response.ResponseDTO;
+import com.beval.empirejavafx.exception.CustomException;
 import com.beval.empirejavafx.manager.BuildingStateManager;
 import com.beval.empirejavafx.manager.CastleStateManager;
 import com.beval.empirejavafx.manager.StageManager;
@@ -110,6 +111,10 @@ public class GameController {
                     ResponseDTO<Object> responseDTO = ApiClient.createBuilding(rowIndex, colIndex, BuildingStateManager
                             .getBuildingEntity().getBuildingType().getId());
                     System.out.println(responseDTO);
+                    //throw server message if building not successful
+                    if (responseDTO.getStatus() != 200){
+                        throw new CustomException(responseDTO.getMessage());
+                    }
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
                 } finally {
