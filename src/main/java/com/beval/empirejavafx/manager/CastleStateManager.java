@@ -125,6 +125,7 @@ public class CastleStateManager {
                     .getBuildingEntity().getBuildingType().getHeightSizingRatio());
             imageView.setFitWidth(AppConstants.CASTLE_BUILDING_IMAGE_WIDTH * building
                     .getBuildingEntity().getBuildingType().getWidthSizingRatio());
+//            imageView.setRotate(32);
             gridPane.add(imageView, building.getCoordinateX(), building.getCoordinateY());
         }
     }

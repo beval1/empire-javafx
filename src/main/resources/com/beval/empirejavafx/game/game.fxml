@@ -18,7 +18,7 @@
 
     <!-- castle buildings grid   -->
 <!--    hgap="30" vgap="30"-->
-    <GridPane fx:id="grid"  gridLinesVisible="true"></GridPane>
+    <GridPane fx:id="grid"  gridLinesVisible="true" ></GridPane>
 
     <GridPane hgap="30" vgap="30" pickOnBounds="false">
 <!--        GridPane.columnSpan="20"-->

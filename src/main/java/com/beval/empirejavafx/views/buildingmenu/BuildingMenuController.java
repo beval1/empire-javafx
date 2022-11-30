@@ -27,7 +27,6 @@ public class BuildingMenuController {
     public void updateView() throws IOException, InterruptedException {
         ResponseDTO<List<BuildingEntityDTO>> responseDTO = ApiClient.getBuildings();
         ListView<HBox> listView = new ListView<>();
-        //TODO: display building cost and building time
         for(BuildingEntityDTO buildingEntityDTO : responseDTO.getContent()){
             if (!buildingEntityDTO.getBuildingType().isBuildable()){
                 continue;
@@ -41,7 +40,6 @@ public class BuildingMenuController {
                     if (buildingEntityDTO.getStoneRequired() > castleWood ||
                             buildingEntityDTO.getWoodRequired() > castleStone) {
                         throw new NotEnoughResourcesException();
-
                     }
                     StageManager.removePopUpWindow(StageManager.getPopupWindows().size()-1);
                     BuildingStateManager.setInBuildingMode(true);

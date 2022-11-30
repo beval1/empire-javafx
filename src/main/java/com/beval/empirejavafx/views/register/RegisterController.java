@@ -3,6 +3,7 @@ package com.beval.empirejavafx.views.register;
 import com.beval.empirejavafx.api.ApiClient;
 import com.beval.empirejavafx.dto.response.JwtResponseDTO;
 import com.beval.empirejavafx.dto.response.ResponseDTO;
+import com.beval.empirejavafx.exception.CustomException;
 import com.beval.empirejavafx.views.game.LoadingScreen;
 import com.beval.empirejavafx.views.login.LoginInForm;
 import javafx.event.ActionEvent;
@@ -42,9 +43,11 @@ public class RegisterController {
             ResponseDTO<JwtResponseDTO> signInResponse =
                     ApiClient.signIn(usernameField.getText(), passwordField.getText());
 
-            if (signInResponse.getStatus() != 200) {
+            if (signInResponse.getStatus() == 200) {
                 LoadingScreen loadingScreen = new LoadingScreen();
                 loadingScreen.show();
+            } else {
+                throw new CustomException("There was an error, trying to log you in.");
             }
         }
     }
