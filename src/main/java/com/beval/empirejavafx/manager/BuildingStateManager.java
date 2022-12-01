@@ -53,4 +53,8 @@ public class BuildingStateManager {
             return false;
         });
     }
+
+    public static void addNodeByRowColumnIndex(int coordinateY, int coordinateX, GridPane buildingsGrid, Node node) {
+        buildingsGrid.add(node, coordinateX, coordinateY);
+    }
 }

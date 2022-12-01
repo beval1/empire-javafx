@@ -125,6 +125,7 @@ public class CastleStateManager {
                     building.getCoordinateX(), gridPane);
             if (node instanceof ImageView){
                 //don't redraw if it's already there
+//                System.out.println("skipping repainting");
                 continue;
             }
 
@@ -145,9 +146,10 @@ public class CastleStateManager {
                     }
                 }
             });
-//            imageView.setRotate(32);
             int rowSpan = (int) Math.ceil(building.getBuildingEntity().getBuildingType().getHeightSizingRatio());
             int colSpan = (int) Math.ceil(building.getBuildingEntity().getBuildingType().getWidthSizingRatio());
+            BuildingStateManager.removeNodeByRowColumnIndex(building.getCoordinateY(), building.getCoordinateX(),
+                    gridPane);
             gridPane.add(imageView, building.getCoordinateX(), building.getCoordinateY(), rowSpan, colSpan);
         }
     }

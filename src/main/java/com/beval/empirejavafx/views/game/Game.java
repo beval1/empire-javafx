@@ -61,11 +61,12 @@ public class Game implements AbstractView, RenderingView {
             grid.getRowConstraints().add(rowConstraints);
         }
 
-//        for (int i = 0 ; i < numCols ; i++) {
-//            for (int j = 0; j < numRows; j++) {
-//                addPane(i, j, grid);
-//            }
-//        }
+        //this is required because you can't trace click of something that doesn't exist on the grid;
+        for (int i = 0 ; i < numCols ; i++) {
+            for (int j = 0; j < numRows; j++) {
+                addPane(i, j, grid);
+            }
+        }
 
         BuildingStateManager.setBuildingsGrid(grid);
     }

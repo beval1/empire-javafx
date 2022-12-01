@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
@@ -95,6 +96,10 @@ public class BuildingPropertyMenuController {
                 BuildingStateManager.removeNodeByRowColumnIndex(castleBuildingDTO.getCoordinateY(),
                         castleBuildingDTO.getCoordinateX(),
                         BuildingStateManager.getBuildingsGrid());
+                //add new pane on the place of the removed object, to trace clicks
+                Pane pane = new Pane();
+                BuildingStateManager.addNodeByRowColumnIndex(castleBuildingDTO.getCoordinateY(),
+                        castleBuildingDTO.getCoordinateX(), BuildingStateManager.getBuildingsGrid(), pane);
                 BuildingStateManager.setSelectedCastleBuilding(null);
                 StageManager.removePopUpWindow(StageManager.getPopupWindows().size() - 1);
             }

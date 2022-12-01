@@ -25,6 +25,9 @@ import lombok.SneakyThrows;
 
 import java.io.IOException;
 
+import static com.beval.empirejavafx.config.AppConstants.CASTLE_BUILDING_IMAGE_HEIGHT;
+import static com.beval.empirejavafx.config.AppConstants.CASTLE_BUILDING_IMAGE_WIDTH;
+
 @Getter
 public class GameController {
     @FXML
@@ -141,10 +144,8 @@ public class GameController {
     }
 
     private void setCursorImage(String buildingImage) {
-        ImageView imageView = new ImageView(new Image(buildingImage));
-        imageView.setFitHeight(AppConstants.CASTLE_BUILDING_IMAGE_HEIGHT);
-        imageView.setFitWidth(AppConstants.CASTLE_BUILDING_IMAGE_WIDTH);
-        Image cursorImage = imageView.getImage();
+        Image cursorImage = new Image(buildingImage, CASTLE_BUILDING_IMAGE_WIDTH,
+                CASTLE_BUILDING_IMAGE_HEIGHT, false, false);
         Cursor cursor = new ImageCursor(cursorImage);
         StageManager.getStage().getScene().setCursor(cursor);
         BuildingStateManager.setCursor(cursor);
