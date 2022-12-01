@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Text?>
+<?import java.net.URL?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.beval.empirejavafx.views.buildingpropertymenu.BuildingPropertyMenuController"
+           prefHeight="400.0" prefWidth="600.0" fx:id="root">
+
+    <stylesheets>
+        <URL value="@building-property-menu.css"/>
+    </stylesheets>
+
+    <HBox>
+        <ImageView fx:id="buildingImage" fitHeight="100" fitWidth="100"></ImageView>
+        <ListView>
+            <HBox spacing="20" onMouseClicked="#handleUpgrade">
+                <ImageView>
+                    <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669848555/empire/usercontrols/upgrade_button-removebg-preview_rygqal.png"></Image>
+                </ImageView>
+                <VBox>
+                    <Text styleClass="actionText">Upgrade</Text>
+                    <Text fx:id="resourceRequired"></Text>
+                </VBox>
+            </HBox>
+            <HBox spacing="20" onMouseClicked="#handleDestroy">
+                <ImageView>
+                    <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669848586/empire/usercontrols/destroy_icon-removebg-preview_f3tu0p.png"></Image>
+                </ImageView>
+                <VBox>
+                    <Text styleClass="actionText">Destroy</Text>
+                </VBox>
+            </HBox>
+        </ListView>
+    </HBox>
+
+</StackPane>

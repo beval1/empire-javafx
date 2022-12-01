@@ -1,6 +1,7 @@
 package com.beval.empirejavafx.views.game;
 
 import com.beval.empirejavafx.Main;
+import com.beval.empirejavafx.manager.BuildingStateManager;
 import com.beval.empirejavafx.manager.RenderingManager;
 import com.beval.empirejavafx.manager.StageManager;
 import com.beval.empirejavafx.views.AbstractView;
@@ -16,6 +17,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+
+import static com.beval.empirejavafx.config.AppConstants.CASTLE_GRID_CELL_COLUMN_SIZE;
+import static com.beval.empirejavafx.config.AppConstants.CASTLE_GRID_CELL_ROW_SIZE;
 
 public class Game implements AbstractView, RenderingView {
     private GameController gameController;
@@ -47,13 +51,13 @@ public class Game implements AbstractView, RenderingView {
         int numRows = 16;
 
         for (int i = 0 ; i < numCols ; i++) {
-            ColumnConstraints colConstraints = new ColumnConstraints(60);
+            ColumnConstraints colConstraints = new ColumnConstraints(CASTLE_GRID_CELL_COLUMN_SIZE);
 //            colConstraints.setHgrow(Priority.SOMETIMES);
             grid.getColumnConstraints().add(colConstraints);
         }
 
         for (int i = 0 ; i < numRows ; i++) {
-            RowConstraints rowConstraints = new RowConstraints(60);
+            RowConstraints rowConstraints = new RowConstraints(CASTLE_GRID_CELL_ROW_SIZE);
 //            rowConstraints.setVgrow(Priority.SOMETIMES);
             grid.getRowConstraints().add(rowConstraints);
         }
@@ -63,6 +67,8 @@ public class Game implements AbstractView, RenderingView {
                 addPane(i, j, grid);
             }
         }
+
+        BuildingStateManager.setBuildingsGrid(grid);
     }
 
     private void addPane(int colIndex, int rowIndex, GridPane grid) {

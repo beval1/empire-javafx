@@ -5,9 +5,10 @@ import com.beval.empirejavafx.config.AppConstants;
 import com.beval.empirejavafx.dto.response.CastleBuildingDTO;
 import com.beval.empirejavafx.dto.response.CastleDTO;
 import com.beval.empirejavafx.dto.response.ResponseDTO;
-import javafx.scene.Node;
+import com.beval.empirejavafx.views.buildingpropertymenu.BuildingPropertyMenu;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
@@ -119,23 +120,26 @@ public class CastleStateManager {
 
         //set Image on Grid row and column
         for (CastleBuildingDTO building : buildings) {
-//            Pane pane = (Pane) getNodeFromGridPane(gridPane, building.getCoordinateY(), building.getCoordinateX());
             ImageView imageView = new ImageView(new Image(building.getBuildingEntity().getBuildingImage()));
             imageView.setFitHeight(AppConstants.CASTLE_BUILDING_IMAGE_HEIGHT * building
                     .getBuildingEntity().getBuildingType().getHeightSizingRatio());
             imageView.setFitWidth(AppConstants.CASTLE_BUILDING_IMAGE_WIDTH * building
                     .getBuildingEntity().getBuildingType().getWidthSizingRatio());
+            imageView.setOnMouseClicked(mouseEvent -> {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+                    System.out.println("image clicked");
+                    BuildingStateManager.setSelectedCastleBuilding(building);
+                    BuildingPropertyMenu buildingPropertyMenu = new BuildingPropertyMenu();
+                    try {
+                        buildingPropertyMenu.show();
+                    } catch (IOException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
 //            imageView.setRotate(32);
             gridPane.add(imageView, building.getCoordinateX(), building.getCoordinateY());
         }
     }
 
-    private static Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
-        for (Node node : gridPane.getChildren()) {
-            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
-                return node;
-            }
-        }
-        return null;
-    }
 }

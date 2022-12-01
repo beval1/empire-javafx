@@ -1,5 +1,6 @@
 package com.beval.empirejavafx.views.game;
 
+import com.beval.empirejavafx.alerts.LevelUpAlert;
 import com.beval.empirejavafx.api.ApiClient;
 import com.beval.empirejavafx.config.AppConstants;
 import com.beval.empirejavafx.dto.response.ResponseDTO;
@@ -15,6 +16,8 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import lombok.Getter;
@@ -58,9 +61,11 @@ public class GameController {
     private Text citizens;
 
     @FXML
-    private void handleBuildingMenu() throws IOException, InterruptedException {
-        BuildingMenu buildingMenu = new BuildingMenu();
-        buildingMenu.show();
+    private void handleBuildingMenu(MouseEvent mouseEvent) throws IOException, InterruptedException {
+        if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+            BuildingMenu buildingMenu = new BuildingMenu();
+            buildingMenu.show();
+        }
     }
 
     @SneakyThrows
@@ -84,6 +89,13 @@ public class GameController {
 
     private void loadUserInfo() throws IOException, InterruptedException {
         UserStateManager.updateUserState();
+
+        //User Level Up Alert
+        if (!levelText.getText().isBlank() && Integer.parseInt(levelText.getText()) != UserStateManager.getLevel()){
+            LevelUpAlert levelUpAlert = new LevelUpAlert();
+            levelUpAlert.show();
+        }
+
         levelText.setText(String.valueOf(UserStateManager.getLevel()));
         usernameText.setText(UserStateManager.getUsername());
         mightyPointsText.setText(String.valueOf(UserStateManager.getMightyPoints()));
@@ -122,6 +134,7 @@ public class GameController {
                     BuildingStateManager.setBuildingEntity(null);
                     BuildingStateManager.setCursor(null);
                     StageManager.getStage().getScene().setCursor(null);
+                    grid.setOnMouseClicked(null);
                 }
             }
         });
