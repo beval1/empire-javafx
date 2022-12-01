@@ -18,7 +18,10 @@
     </stylesheets>
 
     <HBox>
-        <ImageView fx:id="buildingImage" fitHeight="100" fitWidth="100"></ImageView>
+        <VBox>
+            <ImageView fx:id="buildingImage" fitHeight="100" fitWidth="100"></ImageView>
+            <Text fx:id="currentBuildingInfo"></Text>
+        </VBox>
         <ListView>
             <HBox spacing="20" onMouseClicked="#handleUpgrade">
                 <ImageView>

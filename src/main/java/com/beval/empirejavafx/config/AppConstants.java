@@ -7,8 +7,11 @@ public class AppConstants {
 
     public static final int CASTLE_BUILDING_IMAGE_WIDTH = 60;
     public static final int CASTLE_BUILDING_IMAGE_HEIGHT = 60;
-    public static final int CASTLE_GRID_CELL_COLUMN_SIZE = 60;
+    //Grid row size and column size shouldn't be lower than image width and height
     public static final int CASTLE_GRID_CELL_ROW_SIZE = 60;
+    public static final int CASTLE_GRID_ROWS = 16;
+    public static final int CASTLE_GRID_CELL_COLUMN_SIZE = 60;
+    public static final int CASTLE_GRID_COLUMNS = 27;
 
     public static final String START_ANIMATION_URL =
             "https://empire-html5.goodgamestudios.com/default/ModernStartscreenAnimation_small.mp4";

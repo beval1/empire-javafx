@@ -1,5 +1,6 @@
 package com.beval.empirejavafx;
 
+import com.beval.empirejavafx.exception.CustomException;
 import com.beval.empirejavafx.manager.StageManager;
 import com.beval.empirejavafx.views.login.LoginInForm;
 import javafx.application.Application;
@@ -28,7 +29,9 @@ public class Main extends Application {
             alert.setHeaderText(null);
             alert.setContentText(e.getMessage());
             alert.showAndWait();
-            e.printStackTrace();
+            if (!(e instanceof CustomException)) {
+                e.printStackTrace();
+            }
         } else {
             System.err.println("An unexpected error occurred in " + t);
         }

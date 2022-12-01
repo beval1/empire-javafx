@@ -28,10 +28,14 @@ public class BuildingStateManager {
     @Setter
     private static GridPane buildingsGrid;
 
-    public static Node getNodeFromGridPane(int col, int row, GridPane gridPane) {
+    public static Node getNodeFromGridPane(int row, int col, GridPane gridPane) {
         for (Node node : gridPane.getChildren()) {
-            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
-                return node;
+            Integer columnIndex = GridPane.getColumnIndex(node);
+            Integer rowIndex = GridPane.getRowIndex(node);
+            if (columnIndex != null && rowIndex != null) {
+                if (columnIndex == col && rowIndex == row){
+                    return node;
+                }
             }
         }
         return null;

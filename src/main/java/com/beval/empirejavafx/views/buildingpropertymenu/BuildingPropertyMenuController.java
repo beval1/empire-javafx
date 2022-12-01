@@ -8,6 +8,8 @@ import com.beval.empirejavafx.exception.CustomException;
 import com.beval.empirejavafx.manager.BuildingStateManager;
 import com.beval.empirejavafx.manager.StageManager;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -27,6 +29,9 @@ public class BuildingPropertyMenuController {
 
     @FXML
     private ImageView buildingImage;
+
+    @FXML
+    private Text currentBuildingInfo;
 
     public void updateView() throws IOException, InterruptedException {
         CastleBuildingDTO selectedBuildingDTO = BuildingStateManager.getSelectedCastleBuilding();
@@ -49,6 +54,9 @@ public class BuildingPropertyMenuController {
         }
 
         buildingImage.setImage(new Image(selectedBuildingDTO.getBuildingEntity().getBuildingImage()));
+        currentBuildingInfo.setText(String.format("   %s%n   Level: %d",
+                selectedBuildingDTO.getBuildingEntity().getBuildingType().getBuildingName(),
+                selectedBuildingDTO.getBuildingEntity().getLevel()));
     }
 
     @FXML
@@ -69,6 +77,15 @@ public class BuildingPropertyMenuController {
     @FXML
     private void handleDestroy(MouseEvent mouseEvent) throws IOException, InterruptedException {
         if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+            //confirm dialogue
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText("");
+            alert.setContentText("Are you sure?");
+            alert.showAndWait();
+            if (alert.getResult() != ButtonType.OK) {
+                return;
+            }
+
             CastleBuildingDTO castleBuildingDTO = BuildingStateManager.getSelectedCastleBuilding();
             int buildingId = castleBuildingDTO.getId();
             ResponseDTO<Object> destroyResponse = ApiClient.destroyBuilding(buildingId);
