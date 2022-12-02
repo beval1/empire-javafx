@@ -16,7 +16,7 @@ public class RenderingManager {
         render();
     }
 
-    private static void render() throws IOException {
+    private static void render() {
         if (renderingView == null) {
             throw new IllegalStateException("RenderingView is null!");
         }

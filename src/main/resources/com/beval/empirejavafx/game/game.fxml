@@ -120,7 +120,7 @@
                 <ImageView fx:id="buildingsImageIcon" onMouseClicked="#handleBuildingMenu">
                     <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669638520/empire/usercontrols/buildings_icon_m9zdym.png"/>
                 </ImageView>
-                <ImageView fx:id="armyImageIcon">
+                <ImageView fx:id="armyImageIcon" onMouseClicked="#handleArmyMenu">
                     <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669638514/empire/usercontrols/army_icon_jlz6so.png"/>
                 </ImageView>
             </HBox>

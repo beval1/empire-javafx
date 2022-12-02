@@ -35,9 +35,16 @@ module com.example.empirejavafx {
     opens com.beval.empirejavafx.views.buildingpropertymenu to javafx.fxml;
     exports com.beval.empirejavafx.views.buildingpropertymenu;
 
+    opens com.beval.empirejavafx.views.taxmenu to javafx.fxml;
+    exports com.beval.empirejavafx.views.taxmenu;
+
+    opens com.beval.empirejavafx.views.armymenu to javafx.fxml;
+    exports com.beval.empirejavafx.views.armymenu;
+
     exports com.beval.empirejavafx.manager;
     opens com.beval.empirejavafx.manager to javafx.fxml;
 
     exports com.beval.empirejavafx.dto.payload;
     exports com.beval.empirejavafx.dto.response;
+    exports com.beval.empirejavafx.dto.enums;
 }

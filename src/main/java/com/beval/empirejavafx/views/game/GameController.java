@@ -2,20 +2,19 @@ package com.beval.empirejavafx.views.game;
 
 import com.beval.empirejavafx.alerts.LevelUpAlert;
 import com.beval.empirejavafx.api.ApiClient;
-import com.beval.empirejavafx.config.AppConstants;
 import com.beval.empirejavafx.dto.response.ResponseDTO;
 import com.beval.empirejavafx.exception.CustomException;
 import com.beval.empirejavafx.manager.BuildingStateManager;
 import com.beval.empirejavafx.manager.CastleStateManager;
 import com.beval.empirejavafx.manager.StageManager;
 import com.beval.empirejavafx.manager.UserStateManager;
+import com.beval.empirejavafx.views.armymenu.ArmyMenu;
 import com.beval.empirejavafx.views.buildingmenu.BuildingMenu;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -68,6 +67,14 @@ public class GameController {
         if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
             BuildingMenu buildingMenu = new BuildingMenu();
             buildingMenu.show();
+        }
+    }
+
+    @FXML
+    private void handleArmyMenu(MouseEvent mouseEvent) throws IOException, InterruptedException {
+        if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+            ArmyMenu armyMenu = new ArmyMenu();
+            armyMenu.show();
         }
     }
 

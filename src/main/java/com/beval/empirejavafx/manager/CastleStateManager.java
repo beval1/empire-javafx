@@ -123,9 +123,8 @@ public class CastleStateManager {
         for (CastleBuildingDTO building : buildings) {
             Node node = BuildingStateManager.getNodeFromGridPane(building.getCoordinateY(),
                     building.getCoordinateX(), gridPane);
-            if (node instanceof ImageView){
+            if (node instanceof ImageView && ((ImageView) node).getImage().getUrl().equals(building.getBuildingEntity().getBuildingImage())){
                 //don't redraw if it's already there
-//                System.out.println("skipping repainting");
                 continue;
             }
 

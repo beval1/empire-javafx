@@ -1,4 +1,4 @@
-package com.beval.empirejavafx.views.buildingpropertymenu;
+package com.beval.empirejavafx.views.armymenu;
 
 import com.beval.empirejavafx.Main;
 import com.beval.empirejavafx.manager.StageManager;
@@ -11,20 +11,19 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class BuildingPropertyMenu implements AbstractView {
+public class ArmyMenu implements AbstractView {
     @Override
     public void show() throws IOException, InterruptedException {
-        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(Main.class
-                .getResource("buildingpropertymenu/building-property-menu.fxml")));
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("armymenu/army-menu.fxml")));
         Parent root = loader.load();
-        Scene scene = new Scene(root, 360, 175);
+        Scene scene = new Scene(root, 260, 400);
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle("Properties Menu");
+        stage.setTitle("Army Menu");
         stage.setResizable(false);
 
-        BuildingPropertyMenuController buildingPropertyMenuController = loader.getController();
-        buildingPropertyMenuController.updateView();
+        ArmyMenuController buildingMenuController = loader.getController();
+        buildingMenuController.updateView();
 
         StageManager.addPopUpWindow(stage);
     }

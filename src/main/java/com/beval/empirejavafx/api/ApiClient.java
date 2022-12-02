@@ -134,4 +134,24 @@ public class ApiClient {
         return JsonMapper.getMapper().readValue(httpResponse.body(), new TypeReference<>() {});
     }
 
+    public static ResponseDTO<List<ArmyUnitDTO>> getArmyUnits() throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(ApiConfig.GET_ARMY_UNITS_URL))
+                .header("Authorization", String.format("Bearer %s", bearerToken))
+                .GET()
+                .build();
+        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return JsonMapper.getMapper().readValue(httpResponse.body(), new TypeReference<>() {});
+    }
+
+    public static ResponseDTO<Object> buyArmyUnits(int armyUnitID) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(ApiConfig.BUY_ARMY_UNITS_URL + armyUnitID))
+                .header("Authorization", String.format("Bearer %s", bearerToken))
+                .POST(HttpRequest.BodyPublishers.noBody())
+                .build();
+        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return JsonMapper.getMapper().readValue(httpResponse.body(), new TypeReference<>() {});
+    }
+
 }

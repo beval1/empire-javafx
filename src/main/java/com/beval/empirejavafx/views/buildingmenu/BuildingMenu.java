@@ -20,6 +20,7 @@ public class BuildingMenu implements AbstractView {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Building Menu");
+        stage.setResizable(false);
 
         BuildingMenuController buildingMenuController = loader.getController();
         buildingMenuController.updateView();

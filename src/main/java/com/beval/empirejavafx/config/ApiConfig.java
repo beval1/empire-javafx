@@ -11,6 +11,8 @@ public class ApiConfig {
     public static final String CREATE_BUILDING_URL = API_URL + "/castle/create-building";
     public static final String DESTROY_BUILDING_URL = API_URL + "/castle/destroy-building";
     public static final String GET_SPECIFIC_BUILDING_TYPE_URL = API_URL + "/buildings/get/";
+    public static final String GET_ARMY_UNITS_URL = API_URL + "/army/get-all";
+    public static final String BUY_ARMY_UNITS_URL = API_URL + "/army/buy/";
 
     private ApiConfig() {}
 }

@@ -17,6 +17,6 @@ public class CastleDTO {
     private int wood;
     private int stone;
     private int food;
-    private int army;
+    private int armySize;
     private int citizens;
 }
