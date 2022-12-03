@@ -22,26 +22,34 @@ public class CastleStateManager {
     private static List<CastleBuildingDTO> buildings = new ArrayList<>();
     private static int castleWorldMapCoordinateX;
     private static int castleWorldMapCoordinateY;
-    private static int wood;
-    private static int stone;
-    private static int food;
+    private static double wood;
+    private static double stone;
+    private static double food;
     private static int army;
     private static int citizens;
 
-    public static int getWood() {
+    public static double getWood() {
         return wood;
     }
 
-    public static void setWood(int wood) {
+    public static void setWood(double wood) {
         CastleStateManager.wood = wood;
     }
 
-    public static int getStone() {
+    public static double getStone() {
         return stone;
     }
 
-    public static void setStone(int stone) {
+    public static void setStone(double stone) {
         CastleStateManager.stone = stone;
+    }
+
+    public static double getFood() {
+        return food;
+    }
+
+    public static void setFood(double food) {
+        CastleStateManager.food = food;
     }
 
     public static void setBuildings(List<CastleBuildingDTO> buildings) {
@@ -76,14 +84,6 @@ public class CastleStateManager {
         CastleStateManager.castleName = castleName;
     }
 
-    public static int getFood() {
-        return food;
-    }
-
-    public static void setFood(int food) {
-        CastleStateManager.food = food;
-    }
-
     public static int getArmy() {
         return army;
     }
@@ -116,7 +116,7 @@ public class CastleStateManager {
         setWood(castleDTO.getWood());
         setStone(castleDTO.getStone());
         setFood(castleDTO.getFood());
-        setArmy(castleDTO.getArmy());
+        setArmy(castleDTO.getArmySize());
         setCitizens(castleDTO.getCitizens());
 
         //set Image on Grid row and column
@@ -142,6 +142,7 @@ public class CastleStateManager {
                         buildingPropertyMenu.show();
                     } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
+//                        Thread.currentThread().interrupt();
                     }
                 }
             });

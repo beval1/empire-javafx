@@ -1,9 +1,11 @@
 package com.beval.empirejavafx.views.armymenu;
 
+import com.beval.empirejavafx.alerts.BoughtSuccessfullyAlert;
 import com.beval.empirejavafx.api.ApiClient;
 import com.beval.empirejavafx.dto.response.ArmyUnitDTO;
 import com.beval.empirejavafx.dto.response.ResponseDTO;
 import com.beval.empirejavafx.exception.CustomException;
+import com.beval.empirejavafx.manager.StageManager;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,6 +23,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ArmyMenuController {
     @FXML
@@ -59,10 +62,10 @@ public class ArmyMenuController {
         userCountInput.setMaxSize(40, 25);
         userInputHbox.getChildren().add(userCountInput);
         userInputHbox.setAlignment(Pos.CENTER);
+        AtomicInteger totalCost = new AtomicInteger();
         userCountInput.textProperty().addListener((observableValue, s, newValue) -> {
-            int totalCost = 0;
             try {
-                totalCost = armyUnitDTO.getCoinPrice() * Integer.parseInt(newValue);
+                totalCost.set(armyUnitDTO.getCoinPrice() * Integer.parseInt(newValue));
             } catch (NumberFormatException ignored){}
             coinsText.setText("Current Price: " + totalCost);
         });
@@ -71,13 +74,23 @@ public class ArmyMenuController {
         Button button = new Button();
         button.setText("BUY");
         button.setOnMouseClicked(mouseEvent -> {
-            try {
-                ResponseDTO<Object> responseDTO = ApiClient.buyArmyUnits(armyUnitDTO.getId());
-                if (responseDTO.getStatus() != 200){
-                    throw new CustomException(responseDTO.getMessage());
+            if (totalCost.get() != 0) {
+                try {
+                    int count = Integer.parseInt(userCountInput.getText());
+                    ResponseDTO<Object> responseDTO = ApiClient.buyArmyUnits(armyUnitDTO.getId(), count);
+                    if (responseDTO.getStatus() != 200) {
+                        throw new CustomException(responseDTO.getMessage());
+                    }
+                    stage.close();
+                    StageManager.removePopUpWindow(StageManager.getPopupWindows().size()-1);
+                    BoughtSuccessfullyAlert boughtSuccessfully = new BoughtSuccessfullyAlert();
+                    boughtSuccessfully.show();
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+//                    Thread.currentThread().interrupt();
                 }
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
+            } else {
+                throw new CustomException("Invalid number!");
             }
         });
         buttonHBox.setAlignment(Pos.CENTER);

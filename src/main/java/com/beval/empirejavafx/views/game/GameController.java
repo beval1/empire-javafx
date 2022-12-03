@@ -90,9 +90,9 @@ public class GameController {
 
     private void loadCastleInfo() throws IOException, InterruptedException {
         CastleStateManager.loadUserCastle(UserStateManager.getUsername(), getGrid());
-        wood.setText(String.valueOf(CastleStateManager.getWood()));
-        stone.setText(String.valueOf(CastleStateManager.getStone()));
-        food.setText(String.valueOf(CastleStateManager.getFood()));
+        wood.setText(String.format("%.2f", CastleStateManager.getWood()));
+        stone.setText(String.format("%.2f", CastleStateManager.getStone()));
+        food.setText(String.format("%.2f", CastleStateManager.getFood()));
         army.setText(String.valueOf(CastleStateManager.getArmy()));
         citizens.setText(String.valueOf(CastleStateManager.getCitizens()));
     }
@@ -139,6 +139,7 @@ public class GameController {
                     }
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
+//                    Thread.currentThread().interrupt();
                 } finally {
                     BuildingStateManager.setInBuildingMode(false);
                     BuildingStateManager.setBuildingEntity(null);

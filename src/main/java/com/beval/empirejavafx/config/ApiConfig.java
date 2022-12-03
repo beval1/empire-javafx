@@ -7,12 +7,12 @@ public class ApiConfig {
     public static final String LOAD_USER_CASTLE_URL = API_URL + "/castle/load";
     public static final String UPDATE_USER_STATE_URL = API_URL + "/user/info";
     public static final String GET_BUILDINGS_URL = API_URL + "/buildings/get-all";
-    public static final String UPGRADE_BUILDING_URL = API_URL + "/castle/upgrade-building";
-    public static final String CREATE_BUILDING_URL = API_URL + "/castle/create-building";
-    public static final String DESTROY_BUILDING_URL = API_URL + "/castle/destroy-building";
+    public static final String UPGRADE_BUILDING_URL = API_URL + "/buildings/upgrade/";
+    public static final String CREATE_BUILDING_URL = API_URL + "/buildings/create";
+    public static final String DESTROY_BUILDING_URL = API_URL + "/buildings/destroy";
     public static final String GET_SPECIFIC_BUILDING_TYPE_URL = API_URL + "/buildings/get/";
     public static final String GET_ARMY_UNITS_URL = API_URL + "/army/get-all";
-    public static final String BUY_ARMY_UNITS_URL = API_URL + "/army/buy/";
+    public static final String BUY_ARMY_UNITS_URL = API_URL + "/army/buy";
 
     private ApiConfig() {}
 }

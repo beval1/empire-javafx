@@ -5,13 +5,15 @@ import javafx.application.Platform;
 
 import java.io.IOException;
 
+import static com.beval.empirejavafx.config.AppConstants.TIME_BETWEEN_RENDERS;
+
 public class RenderingManager {
     private RenderingManager() {
     }
 
     private static RenderingView renderingView = null;
 
-    public static void setRenderingView(RenderingView renderingView) throws IOException {
+    public static void setRenderingView(RenderingView renderingView) {
         RenderingManager.renderingView = renderingView;
         render();
     }
@@ -31,13 +33,12 @@ public class RenderingManager {
                             e.printStackTrace();
                         }
                     });
-                    Thread.sleep(1000);
+                    Thread.sleep(TIME_BETWEEN_RENDERS);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }).start();
-
 
     }
 }

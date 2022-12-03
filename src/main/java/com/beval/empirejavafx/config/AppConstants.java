@@ -12,6 +12,7 @@ public class AppConstants {
     public static final int CASTLE_GRID_ROWS = 16;
     public static final int CASTLE_GRID_CELL_COLUMN_SIZE = 60;
     public static final int CASTLE_GRID_COLUMNS = 27;
+    public static final int TIME_BETWEEN_RENDERS = 1000; //in milliseconds
 
     public static final String START_ANIMATION_URL =
             "https://empire-html5.goodgamestudios.com/default/ModernStartscreenAnimation_small.mp4";

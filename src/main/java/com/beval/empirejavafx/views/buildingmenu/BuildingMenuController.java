@@ -3,9 +3,7 @@ package com.beval.empirejavafx.views.buildingmenu;
 import com.beval.empirejavafx.api.ApiClient;
 import com.beval.empirejavafx.dto.response.BuildingEntityDTO;
 import com.beval.empirejavafx.dto.response.ResponseDTO;
-import com.beval.empirejavafx.exception.NotEnoughResourcesException;
 import com.beval.empirejavafx.manager.BuildingStateManager;
-import com.beval.empirejavafx.manager.CastleStateManager;
 import com.beval.empirejavafx.manager.StageManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -35,12 +33,6 @@ public class BuildingMenuController {
             listView.getItems().add(hBox);
             hBox.setOnMouseClicked(mouseEvent -> {
                 if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
-                    int castleWood = CastleStateManager.getWood();
-                    int castleStone = CastleStateManager.getStone();
-                    if (buildingEntityDTO.getStoneRequired() > castleWood ||
-                            buildingEntityDTO.getWoodRequired() > castleStone) {
-                        throw new NotEnoughResourcesException();
-                    }
                     StageManager.removePopUpWindow(StageManager.getPopupWindows().size()-1);
                     BuildingStateManager.setInBuildingMode(true);
                     BuildingStateManager.setBuildingEntity(buildingEntityDTO);

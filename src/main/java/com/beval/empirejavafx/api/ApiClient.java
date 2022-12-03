@@ -83,16 +83,10 @@ public class ApiClient {
     }
 
     public static ResponseDTO<Object> upgradeBuilding(int castleBuildingId) throws IOException, InterruptedException {
-        UpgradeBuildingDTO upgradeBuildingDTO = UpgradeBuildingDTO
-                .builder()
-                .buildingId(castleBuildingId)
-                .build();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(ApiConfig.UPGRADE_BUILDING_URL))
+                .uri(URI.create(ApiConfig.UPGRADE_BUILDING_URL + castleBuildingId))
                 .header("Authorization", String.format("Bearer %s", bearerToken))
-                .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(JsonMapper.getMapper()
-                        .writeValueAsString(upgradeBuildingDTO)))
+                .POST(HttpRequest.BodyPublishers.noBody())
                 .build();
         HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
         return JsonMapper.getMapper().readValue(httpResponse.body(), new TypeReference<>() {});
@@ -144,11 +138,14 @@ public class ApiClient {
         return JsonMapper.getMapper().readValue(httpResponse.body(), new TypeReference<>() {});
     }
 
-    public static ResponseDTO<Object> buyArmyUnits(int armyUnitID) throws IOException, InterruptedException {
+    public static ResponseDTO<Object> buyArmyUnits(int armyUnitId, int count) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(ApiConfig.BUY_ARMY_UNITS_URL + armyUnitID))
+                .uri(URI.create(ApiConfig.BUY_ARMY_UNITS_URL))
                 .header("Authorization", String.format("Bearer %s", bearerToken))
-                .POST(HttpRequest.BodyPublishers.noBody())
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(
+                        JsonMapper.getMapper().writeValueAsString(new BuyArmyUnitsDTO(armyUnitId, count))
+                ))
                 .build();
         HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
         return JsonMapper.getMapper().readValue(httpResponse.body(), new TypeReference<>() {});
