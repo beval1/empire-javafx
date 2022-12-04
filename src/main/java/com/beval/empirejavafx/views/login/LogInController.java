@@ -7,6 +7,7 @@ import com.beval.empirejavafx.dto.response.ResponseDTO;
 import com.beval.empirejavafx.views.game.Game;
 import com.beval.empirejavafx.views.game.LoadingScreen;
 import com.beval.empirejavafx.views.register.RegisterForm;
+import com.jpro.webapi.WebAPI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -43,7 +44,7 @@ public class LogInController {
         } else {
             //no need to load here, but it's nice optimization if loadingScreen works asynchronously
 //            UserStateManager.updateUserState();
-            if (!AppConstants.DEBUG_MODE) {
+            if (!AppConstants.DEBUG_MODE && !WebAPI.isBrowser()) {
                 LoadingScreen loadingScreen = new LoadingScreen();
                 loadingScreen.show();
             } else {

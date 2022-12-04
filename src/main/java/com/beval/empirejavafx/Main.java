@@ -18,6 +18,7 @@ public class Main extends Application {
         StageManager.setStage(stage);
         LoginInForm loginInForm = new LoginInForm();
         loginInForm.show();
+
         Thread.setDefaultUncaughtExceptionHandler(Main::showError);
     }
 

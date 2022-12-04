@@ -1,5 +1,6 @@
 package com.beval.empirejavafx.manager;
 
+import com.jpro.webapi.WebAPI;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -22,7 +23,11 @@ public class StageManager {
 
     public static void addPopUpWindow(Stage stage) {
         StageManager.popupWindows.add(stage);
-        stage.show();
+        if (WebAPI.isBrowser()){
+            WebAPI.getWebAPI(getStage()).openStageAsPopup(stage);
+        } else {
+            stage.show();
+        }
     }
 
     public static void removePopUpWindow(Stage stage) {
@@ -33,6 +38,9 @@ public class StageManager {
     public static void removePopUpWindow(int index) {
         Stage stage = StageManager.popupWindows.remove(index);
         stage.close();
+        if (WebAPI.isBrowser()){
+            WebAPI.getWebAPI(stage).closeInstance();
+        }
     }
 
     public static void setStage(Stage stage) {

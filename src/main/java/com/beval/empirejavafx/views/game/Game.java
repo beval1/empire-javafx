@@ -42,10 +42,14 @@ public class Game implements AbstractView, RenderingView {
         Parent root = loader.load();
         this.gameController = loader.getController();
         initializeGrid(gameController.getGrid());
-        return new Scene(root);
+        return new Scene(root, 800, 800);
     }
 
     public void initializeGrid(GridPane grid) {
+        if (!DEBUG_MODE){
+            grid.setGridLinesVisible(false);
+        }
+
         int numCols = CASTLE_GRID_COLUMNS;
         int numRows = CASTLE_GRID_ROWS;
 

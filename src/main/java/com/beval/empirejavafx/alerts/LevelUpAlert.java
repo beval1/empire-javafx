@@ -1,16 +1,19 @@
 package com.beval.empirejavafx.alerts;
 
+import com.beval.empirejavafx.manager.StageManager;
 import com.beval.empirejavafx.manager.UserStateManager;
-import javafx.scene.control.Alert;
+import javafx.geometry.Pos;
+import org.controlsfx.control.Notifications;
 
 public class LevelUpAlert implements CustomAlert{
     @Override
     public void show() {
         int userLevel = UserStateManager.getLevel();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Leveled UP");
-        alert.setHeaderText(null);
-        alert.setContentText(String.format("Congratz! You have reached Level %d", userLevel));
-        alert.show();
+        Notifications notificationBuilder = Notifications.create()
+                .title("Leveled UP")
+                .text(String.format("Congratz! You have reached Level %d", userLevel))
+                .owner(StageManager.getStage())
+                .position(Pos.CENTER);
+        notificationBuilder.showConfirm();
     }
 }

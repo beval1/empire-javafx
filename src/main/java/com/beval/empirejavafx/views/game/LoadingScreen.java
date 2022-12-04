@@ -16,6 +16,8 @@ public class LoadingScreen implements AbstractView {
     @Override
     public void show() throws IOException {
         Media media = new Media(Main.class.getResource("animation/ModernStartscreenAnimation_large.mp4").toString());
+//        Media media = new Media(AppConstants.START_ANIMATION_URL);
+
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView (mediaPlayer);
         Group root = new Group();

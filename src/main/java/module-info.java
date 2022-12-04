@@ -6,13 +6,12 @@ module com.example.empirejavafx {
     requires java.net.http;
     requires com.fasterxml.jackson.databind;
     requires static lombok;
+    requires jpro.webapi;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
-    requires validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
-    requires eu.hansolo.tilesfx;
 
     opens com.beval.empirejavafx to javafx.fxml;
     exports com.beval.empirejavafx;
