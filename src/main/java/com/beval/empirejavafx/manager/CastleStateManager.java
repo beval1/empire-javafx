@@ -1,5 +1,6 @@
 package com.beval.empirejavafx.manager;
 
+import com.beval.empirejavafx.alerts.SoldiersDesertingAlert;
 import com.beval.empirejavafx.api.ApiClient;
 import com.beval.empirejavafx.config.AppConstants;
 import com.beval.empirejavafx.dto.response.*;
@@ -12,6 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,106 +22,51 @@ import java.util.List;
 
 public class CastleStateManager {
     private CastleStateManager() {}
+    @Getter
+    @Setter
     private static String castleName;
+    @Getter
+    @Setter
     private static List<CastleBuildingDTO> buildings = new ArrayList<>();
+    @Getter
+    @Setter
     private static int castleWorldMapCoordinateX;
+    @Getter
+    @Setter
     private static int castleWorldMapCoordinateY;
+    @Getter
+    @Setter
     private static int castleQuadrant;
+    @Getter
+    @Setter
     private static double wood;
+    @Getter
+    @Setter
     private static double stone;
+    @Getter
+    @Setter
     private static double food;
+    @Getter
+    @Setter
+    private static double woodProduction;
+    @Getter
+    @Setter
+    private static double stoneProduction;
+    @Getter
+    @Setter
+    private static double foodProduction;
+    @Getter
+    @Setter
     private static int army;
+    @Getter
+    @Setter
     private static int citizens;
-
-    public static int getCastleQuadrant() {
-        return castleQuadrant;
-    }
-
-    public static void setCastleQuadrant(int castleQuadrant) {
-        CastleStateManager.castleQuadrant = castleQuadrant;
-    }
-
-    public static MapCastleDTO getSelectedEnemyCastle() {
-        return selectedEnemyCastle;
-    }
-
-    public static void setSelectedEnemyCastle(MapCastleDTO selectedEnemyCastle) {
-        CastleStateManager.selectedEnemyCastle = selectedEnemyCastle;
-    }
-
+    @Getter
+    @Setter
     private static MapCastleDTO selectedEnemyCastle;
-
-    public static double getWood() {
-        return wood;
-    }
-
-    public static void setWood(double wood) {
-        CastleStateManager.wood = wood;
-    }
-
-    public static double getStone() {
-        return stone;
-    }
-
-    public static void setStone(double stone) {
-        CastleStateManager.stone = stone;
-    }
-
-    public static double getFood() {
-        return food;
-    }
-
-    public static void setFood(double food) {
-        CastleStateManager.food = food;
-    }
-
-    public static void setBuildings(List<CastleBuildingDTO> buildings) {
-        CastleStateManager.buildings = buildings;
-    }
-
-    public static List<CastleBuildingDTO> getBuildings() {
-        return buildings;
-    }
-
-    public static int getCastleWorldMapCoordinateX() {
-        return castleWorldMapCoordinateX;
-    }
-
-    public static void setCastleWorldMapCoordinateX(int castleWorldMapCoordinateX) {
-        CastleStateManager.castleWorldMapCoordinateX = castleWorldMapCoordinateX;
-    }
-
-    public static int getCastleWorldMapCoordinateY() {
-        return castleWorldMapCoordinateY;
-    }
-
-    public static void setCastleWorldMapCoordinateY(int castleWorldMapCoordinateY) {
-        CastleStateManager.castleWorldMapCoordinateY = castleWorldMapCoordinateY;
-    }
-
-    public static String getCastleName() {
-        return castleName;
-    }
-
-    public static void setCastleName(String castleName) {
-        CastleStateManager.castleName = castleName;
-    }
-
-    public static int getArmy() {
-        return army;
-    }
-
-    public static void setArmy(int army) {
-        CastleStateManager.army = army;
-    }
-
-    public static int getCitizens() {
-        return citizens;
-    }
-
-    public static void setCitizens(int citizens) {
-        CastleStateManager.citizens = citizens;
-    }
+    @Getter
+    @Setter
+    private static boolean soldierDesertingAlertShown = false;
 
     public static void loadUserCastle(String username, GridPane gridPane) throws IOException, InterruptedException {
         //send request to fetch castle
@@ -133,6 +81,9 @@ public class CastleStateManager {
         setCastleName(castleDTO.getCastleName());
         setCastleWorldMapCoordinateX(castleDTO.getCoordinateX());
         setCastleWorldMapCoordinateY(castleDTO.getCoordinateY());
+        setWoodProduction(castleDTO.getWoodProduction());
+        setStoneProduction(castleDTO.getStoneProduction());
+        setFoodProduction(castleDTO.getFoodProduction());
         setWood(castleDTO.getWood());
         setStone(castleDTO.getStone());
         setFood(castleDTO.getFood());
@@ -143,6 +94,16 @@ public class CastleStateManager {
         //set Image on Grid row and column
         for (CastleBuildingDTO building : buildings) {
             visualizeGridBuilding(gridPane, building, true);
+        }
+
+        if (getFood() == 0 && foodProduction < 0 && !soldierDesertingAlertShown){
+            SoldiersDesertingAlert soldiersDesertingAlert = new SoldiersDesertingAlert();
+            soldiersDesertingAlert.show();
+            soldierDesertingAlertShown = true;
+        }
+
+        if (getFood() > 0 && foodProduction > 0){
+            soldierDesertingAlertShown = false;
         }
     }
 

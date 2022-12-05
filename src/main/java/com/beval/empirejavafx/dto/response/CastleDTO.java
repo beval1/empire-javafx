@@ -18,6 +18,9 @@ public class CastleDTO {
     private double wood;
     private double stone;
     private double food;
+    private double woodProduction;
+    private double stoneProduction;
+    private double foodProduction;
     private int armySize;
     private int citizens;
 }

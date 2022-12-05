@@ -3,7 +3,7 @@ package com.beval.empirejavafx.alerts;
 import com.beval.empirejavafx.manager.UserStateManager;
 import javafx.scene.control.Alert;
 
-public class LevelUpAlert implements CustomAlert{
+public class LevelUpAlert implements CustomAlert {
     @Override
     public void show() {
         int userLevel = UserStateManager.getLevel();

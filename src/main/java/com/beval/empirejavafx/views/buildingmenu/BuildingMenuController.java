@@ -56,9 +56,11 @@ public class BuildingMenuController implements AbstractViewController {
         Text buildingTime = new Text();
         buildingTime.setText(String.format("Time: %.2f min", (double)buildingEntityDTO.getBuildingTimeSeconds() / 60));
 
+        String productionString = buildingEntityDTO.getProduction() == 0 ? "" :
+                String.format("Production: %d%n", buildingEntityDTO.getProduction());
         Text buildingResources = new Text();
-        buildingResources.setText(String.format("Wood: %d%nStone: %d",
-                buildingEntityDTO.getWoodRequired(), buildingEntityDTO.getStoneRequired()));
+        buildingResources.setText(String.format("%sWood: %d%nStone: %d",
+                productionString, buildingEntityDTO.getWoodRequired(), buildingEntityDTO.getStoneRequired()));
 
         infoVBox.getChildren().add(buildingName);
         infoVBox.getChildren().add(buildingResources);

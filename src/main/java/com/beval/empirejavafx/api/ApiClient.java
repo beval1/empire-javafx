@@ -138,6 +138,16 @@ public class ApiClient {
         return JsonMapper.getMapper().readValue(httpResponse.body(), new TypeReference<>() {});
     }
 
+    public static ResponseDTO<List<CastleArmyDTO>> getCastleArmyUnits() throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(ApiConfig.GET_CASTLE_ARMY_UNITS))
+                .header("Authorization", String.format("Bearer %s", bearerToken))
+                .GET()
+                .build();
+        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return JsonMapper.getMapper().readValue(httpResponse.body(), new TypeReference<>() {});
+    }
+
     public static ResponseDTO<List<MapCastleDTO>> loadMapQuadrant(int quadrant) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(ApiConfig.LOAD_MAP_QUADRANT + quadrant))

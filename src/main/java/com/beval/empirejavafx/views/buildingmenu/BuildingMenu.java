@@ -16,7 +16,7 @@ public class BuildingMenu implements AbstractView {
     public void show() throws IOException, InterruptedException {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("buildingmenu/building-menu.fxml")));
         Parent root = loader.load();
-        Scene scene = new Scene(root, 260, 400);
+        Scene scene = new Scene(root, 300, 400);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Building Menu");

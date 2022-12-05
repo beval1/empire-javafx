@@ -2,13 +2,27 @@
 
 <?import javafx.scene.layout.StackPane?>
 <?import java.net.URL?>
-<StackPane xmlns="http://javafx.com/javafx"
-           xmlns:fx="http://javafx.com/fxml"
-           fx:controller="com.beval.empirejavafx.views.overviewmenu.OverviewMenuController"
-           prefHeight="400.0" prefWidth="600.0" fx:id="root">
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.beval.empirejavafx.views.overviewmenu.OverviewMenuController"
+            prefHeight="400.0" prefWidth="600.0" fx:id="root">
 
     <stylesheets>
         <URL value="@overview-menu.css"/>
     </stylesheets>
+    <top>
+        <Text fx:id="production">Food, Stone, lalalalalal</Text>
+    </top>
+    <center>
+        <StackPane>
+            <ListView fx:id="listView">
+            </ListView>
+            <Text fx:id="noSoldiers"/>
+        </StackPane>
+    </center>
 
-</StackPane>
+</BorderPane>

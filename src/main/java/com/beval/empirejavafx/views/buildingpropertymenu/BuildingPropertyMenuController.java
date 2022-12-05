@@ -47,8 +47,11 @@ public class BuildingPropertyMenuController implements AbstractViewController {
                 .filter(buildingEntityDTO -> buildingEntityDTO.getLevel() == nextLevel).findFirst().orElse(null);
 
         if (upgradeEntity != null) {
+            String productionString = upgradeEntity.getProduction() == 0 ? "" :
+                    String.format("Production: %d%n", upgradeEntity.getProduction());
             String buildTime = String.format("Time: %.2f min", (double)upgradeEntity.getBuildingTimeSeconds() / 60);
-            resourceRequired.setText(String.format("Unlocks at lvl: %d%nWood: %d%nStone: %d%n%s",
+            resourceRequired.setText(String.format("%sUnlocks at lvl: %d%nWood: %d%nStone: %d%n%s",
+                    productionString,
                     upgradeEntity.getUnlocksOnLevel(),
                     upgradeEntity.getWoodRequired(),
                     upgradeEntity.getStoneRequired(),
