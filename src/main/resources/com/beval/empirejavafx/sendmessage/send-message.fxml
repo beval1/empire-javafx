@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.beval.empirejavafx.views.sendmessage.SendMessageController"
+            prefHeight="400.0" prefWidth="600.0" fx:id="root">
+
+    <stylesheets>
+        <URL value="@send-message.css"/>
+    </stylesheets>
+
+    <center>
+        <HBox BorderPane.alignment="CENTER">
+            <VBox BorderPane.alignment="CENTER">
+                <Label>Title</Label>
+                <TextField fx:id="title" maxWidth="350"></TextField>
+                <Label>Content</Label>
+                <TextArea fx:id="content" maxWidth="350"></TextArea>
+                <Button onMouseClicked="#handleSend" BorderPane.alignment="CENTER_RIGHT">Send</Button>
+            </VBox>
+        </HBox>
+    </center>
+
+
+</BorderPane>

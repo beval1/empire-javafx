@@ -181,4 +181,27 @@ public class ApiClient {
         return JsonMapper.getMapper().readValue(httpResponse.body(), new TypeReference<>() {});
     }
 
+    public static ResponseDTO<Object> sendMessage(String receiver, String title, String content) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(ApiConfig.SEND_MESSAGE + receiver))
+                .header("Authorization", String.format("Bearer %s", bearerToken))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(
+                        JsonMapper.getMapper().writeValueAsString(new SendPlayerMessageDTO(title, content))
+                ))
+                .build();
+        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return JsonMapper.getMapper().readValue(httpResponse.body(), new TypeReference<>() {});
+    }
+
+    public static ResponseDTO<List<PlayerMessageDTO>> loadUserMessages() throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(ApiConfig.LOAD_USER_MESSAGES))
+                .header("Authorization", String.format("Bearer %s", bearerToken))
+                .GET()
+                .build();
+        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return JsonMapper.getMapper().readValue(httpResponse.body(), new TypeReference<>() {});
+    }
+
 }

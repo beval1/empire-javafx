@@ -5,6 +5,7 @@ import com.beval.empirejavafx.manager.CastleStateManager;
 import com.beval.empirejavafx.manager.StageManager;
 import com.beval.empirejavafx.views.AbstractViewController;
 import com.beval.empirejavafx.views.castlepreview.CastlePreview;
+import com.beval.empirejavafx.views.sendmessage.SendMessage;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,9 +43,10 @@ public class CastleMenuController implements AbstractViewController {
     }
 
     @FXML
-    private void handleMessage(MouseEvent mouseEvent) throws IOException {
+    private void handleMessage(MouseEvent mouseEvent) throws IOException, InterruptedException {
         if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
-            System.out.println("Message");
+            SendMessage sendMessage = new SendMessage();
+            sendMessage.show();
         }
     }
 

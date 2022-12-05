@@ -165,7 +165,6 @@ public class CastleStateManager {
             if (isOwnCastle) {
                 imageView.setOnMouseClicked(mouseEvent -> {
                     if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
-                        System.out.println("here");
                         CastleStateManager.setSelectedEnemyCastle(mapCastleDTO);
                         CastleMenu castleMenu = new CastleMenu();
                         try {

@@ -16,6 +16,8 @@ public class ApiConfig {
     public static final String BUY_ARMY_UNITS_URL = API_URL + "/army/buy";
     public static final String LOAD_MAP_QUADRANT = API_URL + "/map?quadrant=";
     public static final String LOAD_ENEMY_CASTLE = API_URL + "/castle/enemy/";
+    public static final String SEND_MESSAGE = API_URL + "/message/send/";
+    public static final String LOAD_USER_MESSAGES = API_URL + "/user/messages";
 
     private ApiConfig() {}
 }

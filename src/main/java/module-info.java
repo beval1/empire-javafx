@@ -53,6 +53,12 @@ module com.example.empirejavafx {
     opens com.beval.empirejavafx.views.castlepreview to javafx.fxml;
     exports com.beval.empirejavafx.views.castlepreview;
 
+    opens com.beval.empirejavafx.views.messagemenu to javafx.fxml;
+    exports com.beval.empirejavafx.views.messagemenu;
+
+    opens com.beval.empirejavafx.views.sendmessage to javafx.fxml;
+    exports com.beval.empirejavafx.views.sendmessage;
+
     exports com.beval.empirejavafx.manager;
     opens com.beval.empirejavafx.manager to javafx.fxml;
 

@@ -12,6 +12,7 @@ import com.beval.empirejavafx.views.AbstractViewController;
 import com.beval.empirejavafx.views.armymenu.ArmyMenu;
 import com.beval.empirejavafx.views.buildingmenu.BuildingMenu;
 import com.beval.empirejavafx.views.map.GameMap;
+import com.beval.empirejavafx.views.messagemenu.MessageMenu;
 import com.beval.empirejavafx.views.overviewmenu.OverviewMenu;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -96,6 +97,14 @@ public class GameController implements AbstractViewController {
         }
     }
 
+    @FXML
+    private void handleMessageMenu(MouseEvent mouseEvent) throws IOException, InterruptedException {
+        if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+            MessageMenu messageMenu = new MessageMenu();
+            messageMenu.show();
+        }
+    }
+
     @Override
     public void updateView() throws IOException, InterruptedException {
         if (BuildingStateManager.isInBuildingMode()) {
@@ -104,6 +113,7 @@ public class GameController implements AbstractViewController {
 
         loadUserInfo();
         loadCastleInfo();
+        UserStateManager.loadUserMessages();
     }
 
     private void loadCastleInfo() throws IOException, InterruptedException {

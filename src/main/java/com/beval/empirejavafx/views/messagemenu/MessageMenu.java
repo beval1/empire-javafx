@@ -1,4 +1,4 @@
-package com.beval.empirejavafx.views.overviewmenu;
+package com.beval.empirejavafx.views.messagemenu;
 
 import com.beval.empirejavafx.Main;
 import com.beval.empirejavafx.manager.StageManager;
@@ -11,20 +11,20 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class OverviewMenu implements AbstractView {
+public class MessageMenu implements AbstractView {
     @Override
     public void show() throws IOException, InterruptedException {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(Main.class
-                .getResource("overviewmenu/overview-menu.fxml")));
+                .getResource("messagemenu/message-menu.fxml")));
         Parent root = loader.load();
-        Scene scene = new Scene(root, 600, 250);
+        Scene scene = new Scene(root, 400, 600);
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle("Overview Menu");
+        stage.setTitle("Messages Menu");
         stage.setResizable(false);
 
-        OverviewMenuController overviewMenuController = loader.getController();
-        overviewMenuController.updateView();
+        MessageMenuController messageMenuController = loader.getController();
+        messageMenuController.updateView();
 
         StageManager.addPopUpWindow(stage);
     }

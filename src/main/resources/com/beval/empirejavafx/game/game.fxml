@@ -126,7 +126,7 @@
                 <ImageView fx:id="overviewIcon" onMouseClicked="#handleOverviewMenu">
                     <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1670180233/empire/usercontrols/overviewIcon_mqp0yi.png"/>
                 </ImageView>
-                <ImageView fx:id="messagesIcon">
+                <ImageView fx:id="messagesIcon" onMouseClicked="#handleMessageMenu">
                     <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1670200656/empire/usercontrols/messages_menu_icon_szbpgb.png"/>
                 </ImageView>
             </HBox>
