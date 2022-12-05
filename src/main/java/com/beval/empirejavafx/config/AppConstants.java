@@ -1,7 +1,7 @@
 package com.beval.empirejavafx.config;
 
 public class AppConstants {
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
     public static final String DEBUG_MODE_USERNAME = "test1";
     public static final String DEBUG_MODE_PASSWORD = "1234";
 
