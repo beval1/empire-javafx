@@ -18,7 +18,7 @@
 
     <!-- castle buildings grid   -->
 <!--    hgap="30" vgap="30"-->
-    <GridPane fx:id="grid"  gridLinesVisible="true" ></GridPane>
+    <GridPane fx:id="grid"></GridPane>
 
     <GridPane hgap="30" vgap="30" pickOnBounds="false">
 <!--        GridPane.columnSpan="20"-->
@@ -30,31 +30,31 @@
                 <ImageView>
                     <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658605/empire/usercontrols/wood_qstkbr.png"/>
                 </ImageView>
-                <Text fx:id="wood"></Text>
+                <Text fx:id="wood" styleClass="resourceText"/>
             </StackPane>
             <StackPane>
                 <ImageView>
                     <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658634/empire/usercontrols/stone_zjhlip.png"/>
                 </ImageView>
-                <Text fx:id="stone"></Text>
+                <Text fx:id="stone" styleClass="resourceText"/>
             </StackPane>
             <StackPane>
                 <ImageView>
                     <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658658/empire/usercontrols/food_iawlhn.png"/>
                 </ImageView>
-                <Text fx:id="food"></Text>
+                <Text fx:id="food" styleClass="resourceText"/>
             </StackPane>
             <StackPane>
                 <ImageView>
                     <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658681/empire/usercontrols/army_aa4fou.png"/>
                 </ImageView>
-                <Text fx:id="army"></Text>
+                <Text fx:id="army" styleClass="resourceText"/>
             </StackPane>
             <StackPane>
                 <ImageView>
                     <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658707/empire/usercontrols/city_hjqyje.png"/>
                 </ImageView>
-                <Text fx:id="citizens"></Text>
+                <Text fx:id="citizens" styleClass="resourceText"/>
             </StackPane>
             <ImageView>
                 <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669658571/empire/usercontrols/resource_bar_decoration_right_ajic9u.png"/>
@@ -114,7 +114,7 @@
 
         <bottom>
             <HBox StackPane.alignment="BOTTOM_RIGHT" alignment="BOTTOM_RIGHT">
-                <ImageView fx:id="worldMapImageIcon">
+                <ImageView fx:id="worldMapImageIcon" onMouseClicked="#handleWorldMap">
                     <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669638532/empire/usercontrols/world_icon_gimz5f.png"/>
                 </ImageView>
                 <ImageView fx:id="buildingsImageIcon" onMouseClicked="#handleBuildingMenu">
@@ -122,6 +122,12 @@
                 </ImageView>
                 <ImageView fx:id="armyImageIcon" onMouseClicked="#handleArmyMenu">
                     <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669638514/empire/usercontrols/army_icon_jlz6so.png"/>
+                </ImageView>
+                <ImageView fx:id="overviewIcon" onMouseClicked="#handleOverviewMenu">
+                    <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1670180233/empire/usercontrols/overviewIcon_mqp0yi.png"/>
+                </ImageView>
+                <ImageView fx:id="messagesIcon">
+                    <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1670200656/empire/usercontrols/messages_menu_icon_szbpgb.png"/>
                 </ImageView>
             </HBox>
         </bottom>

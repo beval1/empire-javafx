@@ -8,8 +8,11 @@ import com.beval.empirejavafx.manager.BuildingStateManager;
 import com.beval.empirejavafx.manager.CastleStateManager;
 import com.beval.empirejavafx.manager.StageManager;
 import com.beval.empirejavafx.manager.UserStateManager;
+import com.beval.empirejavafx.views.AbstractViewController;
 import com.beval.empirejavafx.views.armymenu.ArmyMenu;
 import com.beval.empirejavafx.views.buildingmenu.BuildingMenu;
+import com.beval.empirejavafx.views.map.GameMap;
+import com.beval.empirejavafx.views.overviewmenu.OverviewMenu;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
@@ -20,7 +23,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import lombok.Getter;
-import lombok.SneakyThrows;
 
 import java.io.IOException;
 
@@ -28,7 +30,7 @@ import static com.beval.empirejavafx.config.AppConstants.CASTLE_BUILDING_IMAGE_H
 import static com.beval.empirejavafx.config.AppConstants.CASTLE_BUILDING_IMAGE_WIDTH;
 
 @Getter
-public class GameController {
+public class GameController implements AbstractViewController {
     @FXML
     private GridPane grid;
 
@@ -78,8 +80,24 @@ public class GameController {
         }
     }
 
-    @SneakyThrows
-    public void updateView() throws IOException {
+    @FXML
+    private void handleWorldMap(MouseEvent mouseEvent) throws IOException, InterruptedException {
+        if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+            GameMap map = new GameMap();
+            map.show();
+        }
+    }
+
+    @FXML
+    private void handleOverviewMenu(MouseEvent mouseEvent) throws IOException, InterruptedException {
+        if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+            OverviewMenu overviewMenu = new OverviewMenu();
+            overviewMenu.show();
+        }
+    }
+
+    @Override
+    public void updateView() throws IOException, InterruptedException {
         if (BuildingStateManager.isInBuildingMode()) {
             buildingMode();
         }
@@ -139,7 +157,6 @@ public class GameController {
                     }
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
-//                    Thread.currentThread().interrupt();
                 } finally {
                     BuildingStateManager.setInBuildingMode(false);
                     BuildingStateManager.setBuildingEntity(null);

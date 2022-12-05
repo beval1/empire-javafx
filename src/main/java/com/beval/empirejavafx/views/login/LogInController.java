@@ -4,6 +4,9 @@ import com.beval.empirejavafx.api.ApiClient;
 import com.beval.empirejavafx.config.AppConstants;
 import com.beval.empirejavafx.dto.response.JwtResponseDTO;
 import com.beval.empirejavafx.dto.response.ResponseDTO;
+import com.beval.empirejavafx.exception.CustomException;
+import com.beval.empirejavafx.utils.ExceptionUtils;
+import com.beval.empirejavafx.views.AbstractViewController;
 import com.beval.empirejavafx.views.game.Game;
 import com.beval.empirejavafx.views.game.LoadingScreen;
 import com.beval.empirejavafx.views.register.RegisterForm;
@@ -14,8 +17,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.nio.channels.ClosedChannelException;
 
-public class LogInController {
+public class LogInController implements AbstractViewController {
     @FXML
     private Text errorMessage;
 
@@ -36,13 +40,22 @@ public class LogInController {
         System.out.println(username);
         System.out.println(password);
 
-        ResponseDTO<JwtResponseDTO> responseDTO = ApiClient.signIn(username, password);
-        System.out.println(responseDTO);
+        ResponseDTO<JwtResponseDTO> responseDTO = null;
+        try {
+            responseDTO = ApiClient.signIn(username, password);
+            System.out.println(responseDTO);
+        } catch (Exception e){
+            Throwable rootCause = ExceptionUtils.getCause(e);
+            if (rootCause instanceof ClosedChannelException) {
+                throw new CustomException("Can't connect to server!");
+            } else {
+                throw e;
+            }
+        }
+
         if (responseDTO.getStatus() != 200){
             errorMessage.setText(responseDTO.getMessage());
         } else {
-            //no need to load here, but it's nice optimization if loadingScreen works asynchronously
-//            UserStateManager.updateUserState();
             if (!AppConstants.DEBUG_MODE) {
                 LoadingScreen loadingScreen = new LoadingScreen();
                 loadingScreen.show();
@@ -57,5 +70,10 @@ public class LogInController {
     private void handleRegisterButtonAction(ActionEvent event) throws IOException {
         RegisterForm registerForm = new RegisterForm();
         registerForm.show();
+    }
+
+    @Override
+    public void updateView() throws IOException, InterruptedException {
+        //operation is not required
     }
 }

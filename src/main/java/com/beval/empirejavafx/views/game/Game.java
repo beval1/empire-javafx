@@ -4,21 +4,18 @@ import com.beval.empirejavafx.Main;
 import com.beval.empirejavafx.manager.BuildingStateManager;
 import com.beval.empirejavafx.manager.RenderingManager;
 import com.beval.empirejavafx.manager.StageManager;
+import com.beval.empirejavafx.utils.GridUtils;
 import com.beval.empirejavafx.views.AbstractView;
 import com.beval.empirejavafx.views.RenderingView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
 
-import static com.beval.empirejavafx.config.AppConstants.*;
 
 public class Game implements AbstractView, RenderingView {
     private GameController gameController;
@@ -33,7 +30,7 @@ public class Game implements AbstractView, RenderingView {
     }
 
     @Override
-    public void render() throws IOException {
+    public void render() throws IOException, InterruptedException {
         gameController.updateView();
     }
 
@@ -46,34 +43,8 @@ public class Game implements AbstractView, RenderingView {
     }
 
     public void initializeGrid(GridPane grid) {
-        int numCols = CASTLE_GRID_COLUMNS;
-        int numRows = CASTLE_GRID_ROWS;
-
-        for (int i = 0 ; i < numCols ; i++) {
-            ColumnConstraints colConstraints = new ColumnConstraints(CASTLE_GRID_CELL_COLUMN_SIZE);
-//            colConstraints.setHgrow(Priority.SOMETIMES);
-            grid.getColumnConstraints().add(colConstraints);
-        }
-
-        for (int i = 0 ; i < numRows ; i++) {
-            RowConstraints rowConstraints = new RowConstraints(CASTLE_GRID_CELL_ROW_SIZE);
-//            rowConstraints.setVgrow(Priority.SOMETIMES);
-            grid.getRowConstraints().add(rowConstraints);
-        }
-
-        //this is required because you can't trace click of something that doesn't exist on the grid;
-        for (int i = 0 ; i < numCols ; i++) {
-            for (int j = 0; j < numRows; j++) {
-                addPane(i, j, grid);
-            }
-        }
-
+        GridUtils.initializeGridCastle(grid);
         BuildingStateManager.setBuildingsGrid(grid);
-    }
-
-    private void addPane(int colIndex, int rowIndex, GridPane grid) {
-        Pane pane = new Pane();
-        grid.add(pane, colIndex, rowIndex);
     }
 
     private Stage createStage(Scene scene){
@@ -82,6 +53,8 @@ public class Game implements AbstractView, RenderingView {
         stage.setTitle("Empire");
         stage.setMaximized(true);
         stage.setResizable(false);
+        stage.setMaxWidth(1920);
+        stage.setMaxHeight(1080);
         StageManager.setStage(stage);
         return stage;
     }

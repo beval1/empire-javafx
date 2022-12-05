@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.beval.empirejavafx.views.castlepreview.CastlePreviewController"
+           prefHeight="400.0" prefWidth="600.0"
+           fx:id="root"
+           pickOnBounds="false"
+>
+
+    <stylesheets>
+        <URL value="@castle-preview.css"/>
+    </stylesheets>
+
+    <!-- castle buildings grid   -->
+    <GridPane fx:id="grid"></GridPane>
+
+    <BorderPane pickOnBounds="false">
+        <bottom>
+            <HBox StackPane.alignment="BOTTOM_RIGHT" alignment="BOTTOM_RIGHT">
+                <ImageView fx:id="worldMapImageIcon" onMouseClicked="#handleWorldMap">
+                    <Image url="https://res.cloudinary.com/djog8qqis/image/upload/v1669638532/empire/usercontrols/world_icon_gimz5f.png"/>
+                </ImageView>
+            </HBox>
+        </bottom>
+    </BorderPane>
+</StackPane>

@@ -7,6 +7,8 @@ import com.beval.empirejavafx.dto.response.ResponseDTO;
 import com.beval.empirejavafx.exception.CustomException;
 import com.beval.empirejavafx.manager.BuildingStateManager;
 import com.beval.empirejavafx.manager.StageManager;
+import com.beval.empirejavafx.utils.GridUtils;
+import com.beval.empirejavafx.views.AbstractViewController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -21,7 +23,7 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.util.List;
 
-public class BuildingPropertyMenuController {
+public class BuildingPropertyMenuController implements AbstractViewController {
     @FXML
     private StackPane root;
 
@@ -34,6 +36,7 @@ public class BuildingPropertyMenuController {
     @FXML
     private Text currentBuildingInfo;
 
+    @Override
     public void updateView() throws IOException, InterruptedException {
         CastleBuildingDTO selectedBuildingDTO = BuildingStateManager.getSelectedCastleBuilding();
         ResponseDTO<List<BuildingEntityDTO>> responseDTO =
@@ -93,12 +96,12 @@ public class BuildingPropertyMenuController {
             if (destroyResponse.getStatus() != 200) {
                 throw new CustomException(destroyResponse.getMessage());
             } else {
-                BuildingStateManager.removeNodeByRowColumnIndex(castleBuildingDTO.getCoordinateY(),
+                GridUtils.removeNodeByRowColumnIndex(castleBuildingDTO.getCoordinateY(),
                         castleBuildingDTO.getCoordinateX(),
                         BuildingStateManager.getBuildingsGrid());
                 //add new pane on the place of the removed object, to trace clicks
                 Pane pane = new Pane();
-                BuildingStateManager.addNodeByRowColumnIndex(castleBuildingDTO.getCoordinateY(),
+                GridUtils.addNodeByRowColumnIndex(castleBuildingDTO.getCoordinateY(),
                         castleBuildingDTO.getCoordinateX(), BuildingStateManager.getBuildingsGrid(), pane);
                 BuildingStateManager.setSelectedCastleBuilding(null);
                 StageManager.removePopUpWindow(StageManager.getPopupWindows().size() - 1);

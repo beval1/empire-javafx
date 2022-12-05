@@ -2,10 +2,11 @@ package com.beval.empirejavafx.manager;
 
 import com.beval.empirejavafx.api.ApiClient;
 import com.beval.empirejavafx.config.AppConstants;
-import com.beval.empirejavafx.dto.response.CastleBuildingDTO;
-import com.beval.empirejavafx.dto.response.CastleDTO;
-import com.beval.empirejavafx.dto.response.ResponseDTO;
+import com.beval.empirejavafx.dto.response.*;
+import com.beval.empirejavafx.exception.CustomException;
+import com.beval.empirejavafx.utils.GridUtils;
 import com.beval.empirejavafx.views.buildingpropertymenu.BuildingPropertyMenu;
+import com.beval.empirejavafx.views.castlemenu.CastleMenu;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,11 +23,30 @@ public class CastleStateManager {
     private static List<CastleBuildingDTO> buildings = new ArrayList<>();
     private static int castleWorldMapCoordinateX;
     private static int castleWorldMapCoordinateY;
+    private static int castleQuadrant;
     private static double wood;
     private static double stone;
     private static double food;
     private static int army;
     private static int citizens;
+
+    public static int getCastleQuadrant() {
+        return castleQuadrant;
+    }
+
+    public static void setCastleQuadrant(int castleQuadrant) {
+        CastleStateManager.castleQuadrant = castleQuadrant;
+    }
+
+    public static MapCastleDTO getSelectedEnemyCastle() {
+        return selectedEnemyCastle;
+    }
+
+    public static void setSelectedEnemyCastle(MapCastleDTO selectedEnemyCastle) {
+        CastleStateManager.selectedEnemyCastle = selectedEnemyCastle;
+    }
+
+    private static MapCastleDTO selectedEnemyCastle;
 
     public static double getWood() {
         return wood;
@@ -118,21 +138,28 @@ public class CastleStateManager {
         setFood(castleDTO.getFood());
         setArmy(castleDTO.getArmySize());
         setCitizens(castleDTO.getCitizens());
+        setCastleQuadrant(castleDTO.getQuadrant());
 
         //set Image on Grid row and column
         for (CastleBuildingDTO building : buildings) {
-            Node node = BuildingStateManager.getNodeFromGridPane(building.getCoordinateY(),
-                    building.getCoordinateX(), gridPane);
-            if (node instanceof ImageView && ((ImageView) node).getImage().getUrl().equals(building.getBuildingEntity().getBuildingImage())){
-                //don't redraw if it's already there
-                continue;
-            }
+            visualizeGridBuilding(gridPane, building, true);
+        }
+    }
 
-            ImageView imageView = new ImageView(new Image(building.getBuildingEntity().getBuildingImage()));
-            imageView.setFitHeight(AppConstants.CASTLE_BUILDING_IMAGE_HEIGHT * building
-                    .getBuildingEntity().getBuildingType().getHeightSizingRatio());
-            imageView.setFitWidth(AppConstants.CASTLE_BUILDING_IMAGE_WIDTH * building
-                    .getBuildingEntity().getBuildingType().getWidthSizingRatio());
+    private static void visualizeGridBuilding(GridPane gridPane, CastleBuildingDTO building, boolean clickable) {
+        Node node = GridUtils.getNodeFromGridPane(building.getCoordinateY(),
+                building.getCoordinateX(), gridPane);
+        if (node instanceof ImageView && ((ImageView) node).getImage().getUrl().equals(building.getBuildingEntity().getBuildingImage())){
+            //don't redraw if it's already there
+            return;
+        }
+
+        ImageView imageView = new ImageView(new Image(building.getBuildingEntity().getBuildingImage()));
+        imageView.setFitHeight(AppConstants.CASTLE_BUILDING_IMAGE_HEIGHT * building
+                .getBuildingEntity().getBuildingType().getHeightSizingRatio());
+        imageView.setFitWidth(AppConstants.CASTLE_BUILDING_IMAGE_WIDTH * building
+                .getBuildingEntity().getBuildingType().getWidthSizingRatio());
+        if (clickable) {
             imageView.setOnMouseClicked(mouseEvent -> {
                 if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
                     System.out.println("image clicked");
@@ -142,16 +169,69 @@ public class CastleStateManager {
                         buildingPropertyMenu.show();
                     } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
-//                        Thread.currentThread().interrupt();
                     }
                 }
             });
-            int rowSpan = (int) Math.ceil(building.getBuildingEntity().getBuildingType().getHeightSizingRatio());
-            int colSpan = (int) Math.ceil(building.getBuildingEntity().getBuildingType().getWidthSizingRatio());
-            BuildingStateManager.removeNodeByRowColumnIndex(building.getCoordinateY(), building.getCoordinateX(),
+        }
+        int rowSpan = (int) Math.ceil(building.getBuildingEntity().getBuildingType().getHeightSizingRatio());
+        int colSpan = (int) Math.ceil(building.getBuildingEntity().getBuildingType().getWidthSizingRatio());
+        //first remove Pane element, then add ImageView
+        GridUtils.removeNodeByRowColumnIndex(building.getCoordinateY(), building.getCoordinateX(),
+                gridPane);
+        gridPane.add(imageView, building.getCoordinateX(), building.getCoordinateY(), rowSpan, colSpan);
+    }
+
+    public static void loadMapCastles(int quadrant, GridPane gridPane) throws IOException, InterruptedException {
+        ResponseDTO<List<MapCastleDTO>> responseDTO = ApiClient.loadMapQuadrant(quadrant);
+        if (responseDTO.getStatus() != 200){
+            throw new CustomException(responseDTO.getMessage());
+        }
+
+        List<MapCastleDTO> mapCastleDTOS = responseDTO.getContent();
+        for (MapCastleDTO mapCastleDTO : mapCastleDTOS) {
+            Node node = GridUtils.getNodeFromGridPane(mapCastleDTO.getCoordinateY(),
+                    mapCastleDTO.getCoordinateX(), gridPane);
+            if (node instanceof ImageView && ((ImageView) node).getImage().getUrl().equals(mapCastleDTO.getCastleImage())){
+                //don't redraw if it's already there
+                continue;
+            }
+
+            ImageView imageView = new ImageView(new Image(mapCastleDTO.getCastleImage()));
+            imageView.setFitHeight(AppConstants.MAP_CASTLE_IMAGE_HEIGHT);
+            imageView.setFitWidth(AppConstants.MAP_CASTLE_IMAGE_WIDTH);
+            boolean isOwnCastle = CastleStateManager.getCastleWorldMapCoordinateX() != mapCastleDTO.getCoordinateX() ||
+                    CastleStateManager.getCastleWorldMapCoordinateY() != mapCastleDTO.getCoordinateY();
+            if (isOwnCastle) {
+                imageView.setOnMouseClicked(mouseEvent -> {
+                    if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+                        System.out.println("here");
+                        CastleStateManager.setSelectedEnemyCastle(mapCastleDTO);
+                        CastleMenu castleMenu = new CastleMenu();
+                        try {
+                            castleMenu.show();
+                        } catch (IOException | InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+            //first remove Pane element, then add ImageView
+            GridUtils.removeNodeByRowColumnIndex(mapCastleDTO.getCoordinateY(), mapCastleDTO.getCoordinateX(),
                     gridPane);
-            gridPane.add(imageView, building.getCoordinateX(), building.getCoordinateY(), rowSpan, colSpan);
+            gridPane.add(imageView, mapCastleDTO.getCoordinateX(), mapCastleDTO.getCoordinateY());
         }
     }
 
+    public static void loadEnemyCastle(GridPane gridPane) throws IOException, InterruptedException {
+        ResponseDTO<EnemyCastleDTO> responseDTO = ApiClient.loadEnemyCastle(
+                CastleStateManager.getSelectedEnemyCastle().getOwnerUsername());
+        if (responseDTO.getStatus() != 200){
+            throw new CustomException(responseDTO.getMessage());
+        }
+
+        EnemyCastleDTO enemyCastleDTO = responseDTO.getContent();
+        for (CastleBuildingDTO building : enemyCastleDTO.getBuildings()) {
+            CastleStateManager.visualizeGridBuilding(gridPane, building, false);
+        }
+    }
 }

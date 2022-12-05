@@ -4,6 +4,7 @@ import com.beval.empirejavafx.api.ApiClient;
 import com.beval.empirejavafx.dto.response.JwtResponseDTO;
 import com.beval.empirejavafx.dto.response.ResponseDTO;
 import com.beval.empirejavafx.exception.CustomException;
+import com.beval.empirejavafx.views.AbstractViewController;
 import com.beval.empirejavafx.views.game.LoadingScreen;
 import com.beval.empirejavafx.views.login.LoginInForm;
 import javafx.event.ActionEvent;
@@ -14,7 +15,7 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 
-public class RegisterController {
+public class RegisterController implements AbstractViewController {
     @FXML
     private Text errorMessage;
 
@@ -56,5 +57,10 @@ public class RegisterController {
     private void handleLoginButtonAction(ActionEvent event) throws IOException {
         LoginInForm loginInForm = new LoginInForm();
         loginInForm.show();
+    }
+
+    @Override
+    public void updateView() throws IOException, InterruptedException {
+        //not required initial data loading
     }
 }

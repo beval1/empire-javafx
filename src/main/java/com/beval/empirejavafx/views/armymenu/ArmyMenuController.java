@@ -6,6 +6,7 @@ import com.beval.empirejavafx.dto.response.ArmyUnitDTO;
 import com.beval.empirejavafx.dto.response.ResponseDTO;
 import com.beval.empirejavafx.exception.CustomException;
 import com.beval.empirejavafx.manager.StageManager;
+import com.beval.empirejavafx.views.AbstractViewController;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -25,10 +26,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class ArmyMenuController {
+public class ArmyMenuController implements AbstractViewController {
     @FXML
     private StackPane root;
 
+    @Override
     public void updateView() throws IOException, InterruptedException {
         ResponseDTO<List<ArmyUnitDTO>> responseDTO = ApiClient.getArmyUnits();
         if (responseDTO.getStatus() != 200) {
@@ -87,7 +89,6 @@ public class ArmyMenuController {
                     boughtSuccessfully.show();
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
-//                    Thread.currentThread().interrupt();
                 }
             } else {
                 throw new CustomException("Invalid number!");

@@ -5,6 +5,7 @@ import com.beval.empirejavafx.dto.response.BuildingEntityDTO;
 import com.beval.empirejavafx.dto.response.ResponseDTO;
 import com.beval.empirejavafx.manager.BuildingStateManager;
 import com.beval.empirejavafx.manager.StageManager;
+import com.beval.empirejavafx.views.AbstractViewController;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
@@ -18,10 +19,11 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.util.List;
 
-public class BuildingMenuController {
+public class BuildingMenuController implements AbstractViewController {
     @FXML
     private StackPane root;
 
+    @Override
     public void updateView() throws IOException, InterruptedException {
         ResponseDTO<List<BuildingEntityDTO>> responseDTO = ApiClient.getBuildings();
         ListView<HBox> listView = new ListView<>();

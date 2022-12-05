@@ -29,7 +29,7 @@ public class RenderingManager {
                     Platform.runLater(() -> {
                         try {
                             renderingView.render();
-                        } catch (IOException e) {
+                        } catch (IOException | InterruptedException e) {
                             e.printStackTrace();
                         }
                     });

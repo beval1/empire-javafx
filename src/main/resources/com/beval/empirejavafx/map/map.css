@@ -1,0 +1,9 @@
+#root {
+    display: block;
+}
+#root {
+    -fx-background-image: url("https://res.cloudinary.com/djog8qqis/image/upload/v1670179778/empire/usercontrols/map_clean_small_c0vrad.png");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center;
+    -fx-background-size: 1920, 1080;
+}
